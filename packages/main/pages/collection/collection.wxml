@@ -1,0 +1,33 @@
+<!--packages/main/pages/collection/collection.wxml-->
+<view class="container">
+  <view wx:if="{{flag==1}}" class="title">
+    <view>收藏的房源</view>
+    <view>点击房源卡上的心形图标，即可收藏你的心仪房源</view>
+    <image src="/images/shoucang.jpg" mode="aspectFill"></image>
+    <navigator hover-class="more-active" url="/packages/items/pages/items-list/items-list" class="more">开始探索</navigator>
+  </view>
+  <block wx:if="{{flag==2}}" wx:for="{{list}}" wx:key="index">
+    <view class="collect">
+      <movable-area> 
+        <movable-view bindchange="onCurrentX" bindtouchend="onChangeX" x="{{x[index]}}" data-index="{{index}}" style="width:{{screenWidth+90}}px" direction="horizontal" damping="200" animation="false">
+          <view class="flex">
+            <navigator class="itemwrap" url="/packages/items/pages/items-detail/items-detail?id={{item.id}}" style="width:{{screenWidth}}px">
+              <view class="item">
+                <image src="{{mediaHost}}{{item.images[0]}}" mode="aspectFill"></image>
+                <view class="iteminfo">
+                  <view>{{item.province}} · {{item.city}}</view>
+                  <view>{{item.title}}</view>
+                  <view>¥ {{item.price}} 每晚</view>
+                </view>
+              </view>
+            </navigator>
+            <view class="delete" data-index="{{index}}" bindtap="onDelete">删除</view>
+          </view> 
+        </movable-view>
+      </movable-area>
+      <view class="line"></view>
+    </view>
+  </block>
+</view>
+<mainTab curNum="1"></mainTab>
+

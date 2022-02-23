@@ -1,0 +1,58 @@
+<!--packages/calendar/pages/index/index.wxml-->
+<view class="myRili">
+  <view class="myRLTitle">
+    <view class="myRLTInfo flexbox">
+      <view class="flex2">
+        <view class="myRLT_Time {{isSelect?'active':''}}">
+          <text>入住日期</text>
+          <text>{{selectDate.start.year != curDateObj.curYear?selectDate.start.year+'年':''}}{{selectDate.start.month}}月{{selectDate.start.day}}日</text>
+        </view>
+      </view>
+      <view class="flex1">
+        <view class="myRLT_res {{isSelect?'active':''}}">
+          <text>{{nightNum}}晚</text>
+        </view>
+      </view>
+      <view class="flex2">
+        <view class="myRLT_Time {{isSelect?'active':''}}">
+          <text>退房日期</text>
+          <text>{{selectDate.end.year != curDateObj.curYear?selectDate.end.year+'年':''}}{{selectDate.end.month}}月{{selectDate.end.day}}日</text>
+        </view>
+      </view>
+    </view>
+    <view class="RLTitle flexbox">
+      <text class="flex1">日</text>
+      <text class="flex1">一</text>
+      <text class="flex1">二</text>
+      <text class="flex1">三</text>
+      <text class="flex1">四</text>
+      <text class="flex1">五</text>
+      <text class="flex1">六</text>
+    </view>
+  </view>
+  <view class="myRL_list">
+    <view class="RLBox" wx:for="{{riliData}}" wx:for-item="mitem" wx:key="index">
+      <view class="RLTitl">{{mitem.riliTitle}}</view>
+      <view class="RLList flexs">
+        <view wx:for="{{mitem.riliNull}}" wx:for-item="nullitem" wx:key="nullitem"></view>
+        <view wx:for="{{mitem.riliList}}" wx:for-item="dayitem" wx:key="dayitem" wx:for-index="inindex" 
+          class="{{(curDateObj.curYear==mitem.year)&&(curDateObj.curMonth==mitem.month)&&(dayitem.day<curDateObj.curDay)?'disabled':''}} {{curDateObj.wzDate==dayitem.wzDate?'curActive':''}} {{dayitem.select==true?'select':''}} {{(!dayitem.select)&&(dayitem.isBook)?'isBooks':''}} {{(dayitem.isBook)&&(dayitem.select)?'unable':''}}" 
+          bindtap="selectDays" 
+          data-curyear="{{mitem.year}}" 
+          data-curmonth="{{mitem.month}}" 
+          data-curday="{{dayitem.day}}" 
+          data-curmindex="{{index}}">
+          <text>{{dayitem.day}}</text>
+        </view>
+        <!-- disabled => 小于当前时间禁止点击事件-->
+        <!-- curActive => 当前时间 -->
+        <!-- select => 选择的日期及范围 -->
+      </view>
+    </view>
+  </view>
+  <view class="myRLFooter clearfix">
+    <view bindtap="clearSelect">清空日期</view>
+    <view class="activeBg" bindtap="saveSelect">保存</view>
+  </view>
+</view>
+

@@ -1,0 +1,11 @@
+/* packages/me/pages/info/info.wxss */
+.cell-custom .h1{
+  margin-bottom: 5px;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.cell-custom .span{
+  font-size: 28rpx;
+  color:  rgb(0, 132, 137);
+}

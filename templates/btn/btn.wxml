@@ -1,0 +1,9 @@
+<template name="btn">
+  <button
+    open-type="{{openType||''}}"
+    form-type="{{formType||''}}"
+    class="btn btn--primary{{light?'-light':''}}"
+    hover-class="btn--primary{{light?'-light':''}}--hover"
+    bindtap="{{onClick}}"
+    bindgetuserinfo="{{onGetUserInfo}}">{{text}}</button>
+</template>

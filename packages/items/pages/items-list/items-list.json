@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "load-more": "/components/load-more/load-more",
+    "modal": "/components/modal/modal"
+  }
+}

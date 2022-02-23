@@ -1,0 +1,36 @@
+<!--packages/landlordMode/pages/housing/housing.wxml-->
+<view class="container">
+  <navigator hover-class="hover" url="/packages/landlordMode/houseRes/pages/newRes/newRes" class="new">
+    <view class="iconfont icon-jia1"></view>
+    <view class="h2">新建房源</view>
+  </navigator>
+  <block wx:for="{{list}}" wx:key="index">
+    <view class="group">
+      <view class="group-card">
+        <view>
+          <view class="h2">{{item.title}}</view>
+          <view>{{item.restype}}</view>
+          <view>{{item.province}}{{item.city}}</view>
+        </view>
+        <image src="{{mediaHost}}{{Utils.split(item.image)}}" mode="aspectFill"></image>
+      </view>
+      <view class="navigate">
+        <navigator hover-class="hover" url="/packages/landlordMode/houseRes/pages/newRes/newRes?group={{Utils.objToJson(item)}}" class="text">修改房源</navigator>
+        <navigator hover-class="hover" url="/packages/landlordMode/item/pages/showItem/showItem?group={{Utils.objToJson(item)}}" class="text">查看房型</navigator>
+      </view>
+    </view>
+  </block>
+</view>
+<landlordTab curNum="1"></landlordTab>
+
+<wxs module="Utils">
+  module.exports = {
+    objToJson: function(obj){
+      return encodeURIComponent(JSON.stringify(obj));
+    },
+    split: function(str){
+      var images = str.split(',')
+      return images[0];
+    }
+  }
+</wxs>

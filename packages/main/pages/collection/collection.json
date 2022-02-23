@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "mainTab":"/components/mainTab/mainTab"
+  }
+}

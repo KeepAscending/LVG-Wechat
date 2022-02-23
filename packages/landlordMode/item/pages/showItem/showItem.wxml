@@ -1,0 +1,64 @@
+<!--packages/landlordMode/item/pages/showItem/showItem.wxml-->
+<view class="group">
+  <view class="group-card">
+    <view>
+      <view class="h2">{{group.title}}</view>
+      <view>{{group.restype}}</view>
+      <view>{{group.province}}{{group.city}}</view>
+    </view>
+    <image src="{{mediaHost}}{{Utils.split(group.image)}}" mode="aspectFill"></image>
+  </view>
+  <navigator hover-class="hover" url="/packages/landlordMode/item/pages/newItem/newItem?groupId={{group.id}}" class="new">
+    <view class="iconfont icon-jia1"></view>
+    <view>添加房型</view>
+  </navigator>
+</view>
+<view class="container">
+  <block wx:for="{{list}}" wx:key="index">
+    <view class="items-card">
+      <swiper class="swiper" circular="true" indicator-dots="{{true}}" autoplay="{{false}}" interval="{{interval}}" duration="{{duration}}">
+        <block wx:for="{{Utils.splitAll(item.image)}}" wx:key="index">
+          <swiper-item>
+            <image src="{{mediaHost}}{{item}}" mode="aspectFill"></image>
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class="flex">
+        <view class="title">{{item.title}}</view>
+        <view class="price">
+          <text class="p0">¥{{item.price}} </text>
+          <text class="p1">/晚</text>
+        </view>
+      </view>
+      <view class="flex2">
+        <navigator hover-class="hover" url="/packages/landlordMode/item/pages/newItem/newItem?item={{Utils.objToJson(item)}}" class="text">修改房型</navigator>
+        <navigator hover-class="hover" url="/packages/items/pages/items-detail/items-detail?id={{item.id}}" class="text">查看详情</navigator>
+      </view>
+      <view wx:if="{{item.evaluation!=0}}" class="eval">
+        <block wx:for="{{item.evaluation}}" wx:key="index">
+          <image src="/images/wujiaoxing.png" mode="aspectFill"></image>
+        </block>
+        <block wx:for="{{5-item.evaluation}}" wx:key="index">
+          <image src="/images/wujiaoxing_gray.png" mode="aspectFill"></image>
+        </block>
+      </view>
+    </view>
+  </block>
+</view>
+
+<wxs module="Utils">
+  module.exports = {
+    objToJson: function(obj){
+      return encodeURIComponent(JSON.stringify(obj));
+    },
+    split: function(str){
+      var images = str.split(',');
+      return images[0];
+    },
+    splitAll: function(str){
+      var images = str.split(',');
+      images.pop();
+      return images;
+    }
+  }
+</wxs>

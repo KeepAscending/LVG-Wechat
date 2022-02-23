@@ -1,0 +1,48 @@
+<!--packages/order/pages/order-eval/order-eval.wxml-->
+<view class="container">
+  <!-- 评分 -->
+  <view class="evalWrap">
+    <view class="h4">评分</view>
+    <block wx:for="{{5}}" wx:key="index">
+      <view data-index="{{index}}" bindtap="onPoint" class="eval">
+        <image src="{{point>index?'/images/wujiaoxing.png':'/images/wujiaoxing_gray.png'}}" mode="aspectFill"></image>
+      </view>
+    </block>
+    <view class="span">{{point==1?'差':point==2?'一般':point==3?'还不错':point==4?'很好':point==5?'强烈推荐':''}}</view>
+  </view>
+  <!-- 评价 -->
+  <view class="content">
+    <textarea class="textarea"
+      bindinput="onInput"
+      maxlength="200"
+      placeholder="亲，可以从房源的位置、卫生、服务、环境等方面分享您的体验，您的分享是对他人最大的帮助，期待您的分享！"
+    />
+    <!-- 字数限制 -->  
+    <view class="words">{{num}} / 200</view>
+  </view>
+  <!-- 上传图片和视频 -->
+  <view class="uploadWrap">
+    <!-- 预览 -->
+    <view wx:if="{{video!=''}}" class="preview">
+      <video src="##"></video>
+      <view bindtap="onShutVid" class="iconfont icon-guanbi1"></view>
+    </view>
+    <block wx:for="{{images}}" wx:key="index">
+      <view class="preview">
+        <image src="{{item}}" mode="aspectFill"></image>
+        <view bindtap="onShutPic" data-index="{{index}}" class="iconfont icon-guanbi1"></view>
+      </view>
+    </block>
+    <!-- 添加图片或视频 -->
+    <view bindtap="addImage" class="upload">
+      <image src="/images/uploadPic.png" mode="aspectFill"></image>
+      <view class="span">上传图片</view>
+    </view>
+    <view bindtap="addVideo" class="upload">
+      <image src="/images/uploadVid.png" mode="aspectFill"></image>
+      <view class="span">上传视频</view>
+    </view>
+  </view>
+  <!-- 发布 -->
+  <view bindtap="onPublish" hover-class="hover" class="btn">发布评价</view>
+</view>

@@ -1,0 +1,8 @@
+/* components/load-more.wxss */
+.load-more{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  font-size: 32rpx;
+  color: #ccc;
+}

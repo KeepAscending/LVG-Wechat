@@ -1,0 +1,13 @@
+<!--packages/main/pages/authorize/authorize.wxml-->
+<view class="container">
+  <view class='login_logo'>
+    <image src='/images/logo.png' mode="aspectFill"></image>
+    <text>LVG1.0</text>
+  </view>
+  <view class='login_text'>
+    <text>请确认以下授权信息</text>
+    <text>· 获取你的信息 （昵称，头像等）</text>
+  </view>
+  <import src="/templates/btn/btn.wxml" />
+  <template is="btn" data="{{...btn}}"></template>
+</view>

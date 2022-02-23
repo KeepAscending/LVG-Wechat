@@ -1,0 +1,53 @@
+/* components/mainTab/mainTab.wxss */
+@import '/lib/iconfont/iconfont.wxss';
+
+.mainTab{
+  display: -webkit-flex;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999999;
+  background-color: white;
+  border-top: 1px solid rgb(230, 230, 230);
+  text-align: center;
+  padding: 6rpx 0;
+}
+
+.flex1{
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+}
+
+.iconfont{
+  display: block;
+  margin: 0 auto;
+  font-size: 50rpx;
+}
+
+.mainTab text{
+  display: block;
+  font-size: 24rpx;
+}
+
+.mainTab .active .icon-shouye1{
+  color: rgb(255, 75, 67);
+}
+
+.mainTab .active .icon-xin1{
+  color: rgb(255, 75, 67);
+}
+
+.mainTab .active .icon-xiaoxi{
+  color: rgb(255, 75, 67);
+}
+
+.mainTab .active .icon-wodexinyuandan{
+  color: rgb(255, 75, 67);
+}
+
+.mainTab .active text{
+  color: rgb(255, 75, 67);
+}

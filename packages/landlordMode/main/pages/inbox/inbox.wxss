@@ -1,0 +1,25 @@
+/* packages/landlordMode/pages/inbox/inbox.wxss */
+page{
+  margin-bottom: 160rpx;
+}
+
+.container{
+  font-size: 26rpx;
+}
+
+.title{
+  width: 85%;
+  margin: 40rpx auto;
+}
+
+.title :nth-child(1){
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+
+.title image{
+  display: block;
+  width: 500rpx;
+  margin: 30rpx auto;
+}

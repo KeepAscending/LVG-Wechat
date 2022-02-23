@@ -1,0 +1,109 @@
+/* packages/main/pages/collection/collection.wxss */
+page{
+  margin-bottom: 160rpx;
+}
+
+.container{
+  font-size: 26rpx;
+}
+
+.title{
+  width: 85%;
+  margin: 40rpx auto;
+}
+
+.title :nth-child(1){
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+
+.title image{
+  display: block;
+  width: 500rpx;
+  margin: 30rpx auto;
+}
+
+.title .more{
+  width: 100%;
+  height: 80rpx;
+  border: 2rpx solid rgb(0, 132, 137);
+  border-radius: 6rpx;
+  margin-top: 20rpx;
+  text-align: center;
+  line-height: 80rpx;
+  color: rgb(0, 132, 137);
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.title .more-active{
+  background-color: rgb(218, 249, 250);
+}
+
+movable-area{
+  height: 230rpx;
+  width: 100%;
+}
+
+movable-view{
+  height: 230rpx;
+}
+
+.flex, .item{
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  height: 230rpx;
+}
+
+.flex .itemwrap .item{
+  width: 85%;
+  margin: 0 auto;
+}
+
+.flex .itemwrap .item image{
+  flex: 0 0 auto;
+  display: block;
+  width: 230rpx;
+  height: 160rpx;
+  border-radius: 10rpx;
+  margin-right: 40rpx;
+}
+
+.flex .itemwrap .item .iteminfo :nth-child(1){
+  margin-bottom: 10rpx;
+}
+
+.flex .itemwrap .item .iteminfo :nth-child(2){
+  font-size: 28rpx;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* 显示两行就隐藏*/
+  display: -webkit-box;
+  -webkit-line-clamp: 2; 
+  -webkit-box-orient: vertical;
+}
+
+.flex .itemwrap .item .iteminfo :nth-child(3){
+  margin-top: 10rpx;
+}
+
+.flex .delete{
+  text-align: center;
+  line-height: 230rpx;
+  width: 90px;
+  height: 230rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: white;
+  background-color: rgb(0, 132, 137);
+}
+
+.collect .line{
+  width: 85%;
+  height: 1rpx;
+  margin: 0 auto;
+  border-top: 1rpx solid rgb(240, 240, 240);
+}

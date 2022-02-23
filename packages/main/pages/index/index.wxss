@@ -1,0 +1,236 @@
+/* packages/main/pages/index/index.wxss */
+page{
+  padding-bottom: 160rpx;
+}
+
+/* 轮播图*/
+.homeBan .swiper,image{
+  width: 100%;
+  height: 400rpx;
+}
+
+.homeBan .swiper .wx-swiper-dots-horizontal{  
+  margin-bottom: 40rpx;
+  margin-left: 270rpx;
+}
+
+.homeBan .swiper .wx-swiper-dot{ /* 默认指示点的样式 */
+  width: 10rpx;
+  height: 10rpx;
+  background-color: lightgray;
+  margin-right: 10rpx; 
+  border-radius: 50%;
+}    
+
+.homeBan .swiper .wx-swiper-dot-active{ /* 选中指示点的样式 */
+  width: 40rpx;
+  height: 10rpx;
+  border-radius: 6rpx;
+  background-color: white;
+}
+
+/* 查找房源 */
+.find{
+  position: relative;
+  margin: 0 auto;
+  top: -60rpx;
+  width: 85%;
+  height: 300rpx;
+  border-radius: 6rpx;
+  background-color: white;
+  box-shadow: 0 0 10rpx  grey;
+}
+
+.find .find-city,
+.find-date,
+.find-nav{
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 30rpx;
+  margin: 20rpx 40rpx;
+}
+
+.find .find-city{
+  color: dimgray;
+  padding-top: 20rpx;
+  border-bottom:  1px solid rgb(230, 230, 230);
+}
+
+.find .find-date{
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color:  rgb(0, 132, 137);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.find .find-date text{
+  color: dimgray;
+  font-size: 26rpx;
+}
+
+.find .find-nav{
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 6rpx;
+  background-color:  rgb(0, 132, 137);
+}
+
+/* 图标筛选 */
+.option-types{
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  justify-content: space-between;
+  width: 85%;
+  margin: 0 auto;
+  margin-bottom: 20rpx;
+}
+
+.option-types__item{
+  padding-bottom: 32rpx;
+  text-align: center;
+}
+
+.option-types__item image{
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.option-types__item view{
+  color: rgb(57, 57, 57);
+  font-size: 24rpx;
+  font-weight: bold;
+}
+
+/* 优惠券提示 */
+.coupons{
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 auto;
+  width: 85%;
+  height: 120rpx;
+  border-radius: 6rpx;
+  box-shadow: 0 0 6rpx  grey;
+  margin-bottom: 60rpx;
+}
+
+.coupons view, 
+.coupons-detail{
+  color: dimgrey;
+  font-size: 24rpx;
+}
+
+.coupons .coupons-detail{
+  color:  rgb(0, 132, 137);
+  font-weight: bold;
+}
+
+.coupons image{
+  width: 60rpx;
+  height: 60rpx;
+}
+
+/* 精选推荐 */
+.recommend{
+  width: 85%;
+  margin: 0 auto;
+  margin-bottom: 60rpx;
+}
+
+.recommend .h1{
+  font-size: 42rpx;
+  color: rgb(57, 57, 57);
+  font-weight: bolder;
+}
+
+.recommend-city{
+  width: 100%;
+  height: 100rpx;
+  white-space: nowrap;
+  margin-top: 30rpx;
+}
+
+.recommend-city ::-webkit-scrollbar{ /* 隐藏滚动条 */
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.recommend-city view{
+  display: inline-block;
+  margin-right: 30rpx;
+  height: 70rpx;
+  width: 120rpx;
+  color: dimgrey;
+  font-size: 28rpx;
+  text-align: center;
+  line-height: 70rpx;
+  border: 1px solid rgb(230, 230, 230);
+  border-radius: 10rpx;
+  box-shadow: 0 0 6rpx  rgb(230, 230, 230);
+}
+
+.recommend-city .active{
+  color: white;
+  background-color:  rgb(0, 132, 137);
+}
+
+/* 房型列表 */
+.items-list{
+  display: -webkit-flex;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 20rpx;
+}
+
+.items-list .items-item{
+  margin-bottom: 20rpx;
+  width: 48.5%;
+}
+
+/* 显示更多 */
+.recommend .more{
+  width: 100%;
+  height: 80rpx;
+  border-radius: 6rpx;
+  box-shadow: 0 0 6rpx  grey;
+  margin-top: 30rpx;
+  text-align: center;
+  line-height: 80rpx;
+  color:  rgb(0, 132, 137);
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.recommend .more-active{
+  background-color: rgb(218, 249, 250);
+}
+
+/* 页脚 */
+.footer{
+  border-bottom: 1px solid rgb(230, 230, 230);
+}
+
+.footer-item image{
+  width: 70rpx;
+  height: 70rpx;
+}
+
+.footer-item view{
+  font-size: 24rpx;
+  margin-bottom: 5rpx;
+}
+
+.footer-item view:nth-of-type(1){
+  font-weight: bold;
+}
+
+.footer-item view:nth-of-type(2){
+  color: dimgrey;
+}

@@ -1,0 +1,49 @@
+/* components/landlordTab/landlordTab.wxss */
+@import '/lib/iconfont/iconfont.wxss';
+
+.landlordTab{
+  display: -webkit-flex;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999999;
+  background-color: white;
+  border-top: 1px solid rgb(230, 230, 230);
+  text-align: center;
+  padding: 10rpx 0;
+}
+
+.flex1{
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+}
+
+.iconfont{
+  display: block;
+  margin: 0 auto;
+  font-size: 50rpx;
+}
+
+.landlordTab text{
+  display: block;
+  font-size: 24rpx;
+}
+
+.landlordTab .active .icon-xiaoxi1{
+  color: rgb(0, 132, 137);
+}
+
+.landlordTab .active .icon-fangyuan{
+  color: rgb(0, 132, 137);
+}
+
+.landlordTab .active .icon-geren{
+  color: rgb(0, 132, 137);
+}
+
+.landlordTab .active text{
+  color: rgb(0, 132, 137);
+}

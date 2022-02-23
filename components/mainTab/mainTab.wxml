@@ -1,0 +1,28 @@
+<!--components/mainTab/mainTab.wxml-->
+<view class="mainTab">
+  <view class="flex1 {{curNum==0?'active':''}}">
+    <navigator open-type="reLaunch" hover-class="none" url="{{curNum==0?'##':'/packages/main/pages/index/index'}}">
+      <view class="iconfont icon-shouye1"></view>
+      <text>首页</text>
+    </navigator>
+  </view>
+  <view class="flex1 {{curNum==1?'active':''}}">
+    <navigator open-type="reLaunch" hover-class="none" url="{{curNum==1?'##':'/packages/main/pages/collection/collection'}}">
+      <view class="iconfont icon-xin1 "></view>
+      <text>收藏</text>
+    </navigator>
+  </view>
+  <view class="flex1 {{curNum==2?'active':''}}">
+    <navigator open-type="reLaunch" hover-class="none" url="{{curNum==2?'##':'/packages/main/pages/message/message'}}">
+      <view class="iconfont icon-xiaoxi"></view>
+      <text>消息</text>
+    </navigator>
+  </view>
+  <view class="flex1 {{curNum==3?'active':''}}">
+    <navigator open-type="reLaunch" hover-class="none" url="{{curNum==3?'##':'/packages/main/pages/mine/mine'}}">
+      <view class="iconfont icon-wodexinyuandan"></view>
+      <text>我的</text>
+    </navigator>
+  </view>
+</view>
+

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "mainTab": "/components/mainTab/mainTab",
+    "landlordTab": "/components/landlordTab/landlordTab",
+    "items-card": "/components/items-card/items-card"
+  }
+}

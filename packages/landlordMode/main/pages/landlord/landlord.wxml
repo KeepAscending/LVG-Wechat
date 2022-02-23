@@ -1,0 +1,39 @@
+<!--packages/landlordMode/pages/landlord/landlord.wxml-->
+<view class="container">
+  <view class="header">
+    <view class="userinfo">
+      <view class="userinfo-nickname">
+        <view class="h1">{{userinfo.wx_nickname}}</view>
+        <navigator hover-class="none" url="/packages/me/pages/info/info" class="span">个人资料/账号管理</navigator>
+      </view>
+      <view class="userinfo-headpic">
+        <image class="userinfo-avatar" src="{{userinfo.wx_headpic}}" mode="aspectFill"></image>
+      </view>
+    </view>
+  </view>
+  <!-- 订单分类 -->
+  <view class="h2">我的房源订单</view>
+  <view class="styles">
+    <navigator hover-class="none" url="/packages/landlordMode/order/pages/order-list/order-list?tab=0" class="styles-item">
+      <view class="iconfont icon-quanbudingdan1"></view>
+      <view>全部订单</view>
+    </navigator>
+    <navigator hover-class="none" url="/packages/landlordMode/order/pages/order-list/order-list?tab=1" class="styles-item">
+      <view class="iconfont icon-dairuzhu"></view>
+      <view>有效订单</view>
+    </navigator>
+    <navigator hover-class="none" url="/packages/landlordMode/order/pages/order-list/order-list?tab=2" class="styles-item">
+      <view class="iconfont icon-iconfontzhizuobiaozhun0262"></view>
+      <view>已取消订单</view>
+    </navigator>
+  </view>
+  <!-- 开展体验 -->
+  <view class="h2">开展体验</view>
+  <view>
+    <view bindtap="onReLaunch" class="landlord">
+      <view>切换到旅居模式</view>
+      <view class="iconfont icon-you"></view>
+    </view>
+  </view>
+</view>
+<landlordTab curNum="2"></landlordTab>

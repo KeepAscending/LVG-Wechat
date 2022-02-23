@@ -1,0 +1,110 @@
+<!--packages/main/pages/index/index.wxml-->
+<block wx:if="{{home==0}}">
+  <view class="container">
+    <!--轮播图-->
+    <view class="homeBan">
+      <swiper class="swiper" circular="true" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+        <block wx:for="{{banner}}" wx:key="index">
+          <swiper-item>
+            <navigator hover-class="none" url="{{item.link}}">
+              <image src="{{mediaHost}}{{item.pic}}" mode="aspectFill"></image>
+            </navigator>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+
+    <!--查找房源-->
+    <view class="find">
+      <navigator hover-class="none" url="##" class="find-city">{{city}}</navigator>
+      <view class="find-date">
+        <navigator hover-class="none" url="/packages/calendar/pages/index/index">{{selectDate.start.year != curDateObj.curYear && selectDate.start.year?selectDate.start.year+'年':''}}{{selectDate.start.month?selectDate.start.month+'月':'入住日期'}}{{selectDate.start.day?selectDate.start.day+'日':''}}</navigator>
+        <text>-{{nightNum?nightNum:0}}晚-</text>
+        <navigator hover-class="none" url="/packages/calendar/pages/index/index">{{selectDate.end.year != curDateObj.curYear && selectDate.end.year?selectDate.end.year+'年':''}}{{selectDate.end.month?selectDate.end.month+'月':'退房日期'}}{{selectDate.end.day?selectDate.end.day+'日':''}}</navigator>
+      </view>
+      <navigator hover-class="none" url="/packages/items/pages/items-list/items-list" class="find-nav">查找房源</navigator>
+    </view>
+
+    <!--图标式筛选-->
+    <view class="option-types">
+      <navigator hover-class="none" url="/packages/items/pages/items-list/items-list" class="option-types__item">
+        <image src="/images/cook.jpg" mode="aspectFit"></image>
+        <view>可以做饭</view>
+      </navigator>
+      <navigator hover-class="none" url="/packages/items/pages/items-list/items-list" class="option-types__item">
+        <image src="/images/house.jpg" mode="aspectFit"></image>
+        <view>整个房源</view>
+      </navigator>
+      <navigator hover-class="none" url="/packages/items/pages/items-list/items-list" class="option-types__item">
+        <image src="/images/luggage.jpg" mode="aspectFit"></image>
+        <view>自助入住</view>
+      </navigator>
+      <navigator hover-class="none" url="/packages/items/pages/items-list/items-list" class="option-types__item">
+        <image src="/images/medal.jpg" mode="aspectFit"></image>
+        <view>超赞房源</view>
+      </navigator>
+      <navigator hover-class="none" url="/packages/items/pages/items-list/items-list" class="option-types__item">
+        <image src="/images/preferential.jpg" mode="aspectFit"></image>
+        <view>特惠房源</view>
+      </navigator>
+    </view>
+
+    <!-- 优惠券提示 -->
+    <view class="coupons">
+      <image src="/images/redenvelope.jpg" mode="aspectFit"></image>
+      <view>{{hascoupons?"有礼券待使用":"暂无礼券"}}</view>
+      <navigator hover-class="none" url="##" class="coupons-detail" >查看详情</navigator>
+    </view>
+
+    <!-- 热门城市推荐 -->
+    <view class="recommend">
+      <view>
+        <view class="h1">热门城市</view>
+        <scroll-view class="recommend-city" scroll-x="true">
+          <block wx:for="{{cityArr}}" wx:key="index">
+            <view class="{{city_index==index?'active':''}}" bindtap="changeCity" data-index="{{index}}" data-name="{{item}}">{{item}}</view>
+          </block>
+        </scroll-view>
+      </view>
+      <!--房型列表-->
+      <view class="items-list">
+        <view wx:for="{{list}}" wx:key="index" class="items-item">
+          <items-card
+            iid="{{item.id}}" 
+            image="{{mediaHost}}{{item.images[0]}}" 
+            housetype="{{item.restype}}" 
+            room="{{item.room}}" 
+            toilet="{{item.toilet}}"
+            beds="{{item.bedNum}}" 
+            people="{{item.people}}" 
+            price="{{item.price}}" 
+            title="{{item.title}}" 
+            eval="{{item.evaluation}}" 
+            index="{{index}}"
+            iscollect="{{item.collect}}" 
+            bind:change="changeCollect">
+          </items-card>
+        </view>
+      </view>
+      <!-- 加载更多 -->
+      <navigator hover-class="more-active" url="/packages/items/pages/items-list/items-list" class="more">显示更多房源</navigator>
+    </view>
+
+    <!--页脚-->
+    <view class="footer option-types">
+      <view class="footer-item option-types__item">
+        <image src="/images/handshake.jpg" mode="aspectFit"></image>
+        <view>中文客服支持</view>
+        <view>全方位、多渠道为你服务</view>
+      </view>
+      <view class="footer-item option-types__item">
+        <image src="/images/certification.jpg" mode="aspectFit"></image>
+        <view>实名认证</view>
+        <view>房东房客信息真实可靠</view>
+      </view>
+    </view>
+  </view>
+  <mainTab curNum="0"></mainTab>
+</block>
+<block wx:if="{{home==1}}">
+</block>

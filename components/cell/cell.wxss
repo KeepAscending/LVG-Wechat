@@ -1,0 +1,49 @@
+/* components/cell/cell.wxss */
+.cell{
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  margin: 0 40rpx;
+  padding: 30rpx 0;
+  font-size: 28rpx;
+  border-bottom: 1px solid rgb(230, 230, 230);
+}
+
+.cell--hover{
+  background-color: #eee;
+}
+
+.cell__text{
+  -webkit-flex: auto;
+  flex: auto;
+  color: #313131;
+}
+
+.cell__image image{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  border: none;
+}
+
+.cell__right image{
+  width: 28rpx;
+  height: 28rpx;
+  border: none;
+  margin-top: 40rpx;
+}
+
+.cell__unique{
+  -webkit-flex: auto;
+  flex: auto;
+  overflow: hidden;
+  text-align: right;
+  color: #626262;
+}
+
+.cell__text:empty,
+.cell__image:empty,
+.cell__right:empty,
+.cell__unique:empty{
+  display: none;
+}
+

@@ -1,0 +1,30 @@
+.btn{
+  height: 100rpx;
+  border-radius: 0;
+  font-size: 30rpx;
+  line-height: 100rpx;
+}
+
+.btn::after{
+  border: none;
+}
+
+.btn--primary{
+  background-color: #ff4b43;
+  color: #fff;
+}
+
+.btn--primary--hover{
+  background-color: #e7443c;
+  color: rgba(255, 255, 255, .6);
+}
+
+.btn--primary-light{
+  background-color: #feeeeb;
+  color: #ff4b43;
+}
+
+.btn--primary-light--hover{
+  background-color: #e9dad7;
+  color: rgba(255, 75, 67, .6);
+}

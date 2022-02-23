@@ -1,0 +1,267 @@
+<!--packages/items/pages/items-detail/items-detail.wxml-->
+<view class="container">
+  <navBar />
+  <view class="detailBan">
+    <!--轮播图-->
+    <swiper class="swiper" circular="true" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{item.images}}" wx:key="index">
+        <swiper-item>
+          <navigator hover-class="none" url="{{item.link}}">
+            <image src="{{mediaHost}}{{item}}" mode="aspectFill"></image>
+          </navigator>
+        </swiper-item>
+      </block>
+    </swiper>
+    <!--收藏分享-->
+    <view class="item-btns">
+      <view class="item-collect" bindtap="changeCollect">
+        <image wx:if="{{!item.collect}}" src="/images/xin.png" mode="widthFix"></image>
+        <image wx:else src="/images/xin_red.png" mode="widthFix"></image>
+      </view>
+      <view class="item-share"><button open-type="share"><image src="/images/share.png" mode="widthFix"></image></button></view>
+    </view>
+  </view>
+  <!-- 预定日期-->
+  <view class="item-bookDate">
+    <text>{{selectDate.start.year != curDateObj.curYear && selectDate.start.year?selectDate.start.year+'年':''}}{{selectDate.start.month?selectDate.start.month+'月':''}}{{selectDate.start.day?selectDate.start.day+'日-':'入住-'}}{{selectDate.end.year != selectDate.start.year && selectDate.end.year?selectDate.end.year+'年':''}}{{selectDate.end.month != selectDate.start.month && selectDate.end.month?selectDate.end.month+'月':''}}{{selectDate.end.day?selectDate.end.day+'日':'退房'}}{{nightNum!=0?'·'+nightNum+'晚':''}}</text>
+    <navigator hover-class="none" url="/packages/calendar/pages/index/index?iid={{item.id}}" class="option-date">{{selectDate.end.day?'修改日期':'添加日期'}}</navigator>
+  </view>
+  <!--房源信息-->
+  <view class="item-detail">
+    <view class="cate">{{item.city}} · {{item.type}}</view>
+    <view class="title">{{item.title}}</view>
+    <view class="tag"></view>
+    <view class="params">{{item.room}} 间卧室 · {{item.bedNum}} 张床 · {{item.toilet}} 间卫生间 · 最多住 {{item.people}} 人</view>
+    <view class="tips">
+      <view class="tips-1">
+        <image src="/images/balloon.jpg" mode="aspectFit"></image>
+        <view class="span">关注 LVG1.0 公众号，实时获取订单动态及更多新优惠</view>
+        <navigator  hover-class="none" url="#" class="p">去关注</navigator> 
+      </view>
+      <view class="tips-2">
+        <image src="/images/alarmclock.jpg" mode="aspectFit"></image>
+        <view class="span">在 30 天内完成预定，享受1月22日-12月22日期间 9 折优惠</view>
+      </view>
+    </view>
+    <scroll-view class="beds" scroll-x="true">
+      <block wx:for="{{item.bedsArra}}" wx:key="index">
+        <view wx:if="{{strUtil.contains(item, '单人床')}}" class="single">
+          <view class="h4">单人床</view>
+          <view class="iconfont icon-danrenchuangicon"></view>
+          <view class="span">{{item}}</view>
+        </view>
+        <view wx:if="{{strUtil.contains(item, '双人床')}}" class="single">
+          <view class="h4">双人床</view>
+          <view class="iconfont icon-chuang"></view>
+          <view class="span">{{item}}</view>
+        </view>
+      </block>
+      <wxs module="strUtil">
+        module.exports = {
+          contains: function(str1, str2){
+            if(str1.indexOf(str2)!=-1) return true;
+            return false;
+          }
+        }
+      </wxs>
+    </scroll-view>
+    <view class="introduce" bindtap="openModal" data-name="intro">
+      <view class="intro-content">{{item.introduce}}</view>
+      <view class="intro-more">查看更多</view>
+    </view>
+    <view class="facilities">
+      <view class="faci-icon">
+        <view class="iconfont icon-xue"></view>
+        <view class="span">空调</view>
+      </view>
+      <view class="faci-icon">
+        <view class="iconfont icon-WIFI"></view>
+        <view class="span">WIFI</view>
+      </view>
+      <view class="faci-icon">
+        <view class="iconfont icon-reshui"></view>
+        <view class="span">热水沐浴</view>
+      </view>
+      <view class="faci-more" bindtap="openModal" data-name="faci">更多设施</view>
+    </view>
+    <view class="adress">
+      <view>房源位置</view>
+      <view>{{item.province}} · {{item.city}}</view>
+      <view>{{item.adress}}</view>
+    </view>
+  </view>
+
+  <!-- modal -->
+  <modal
+    position="bottom"
+    main-class="modal"
+    show="{{introModalShow}}"
+    bindclose="closeModal">
+    <view class="modal-content">
+      <view class="modal-content-title">
+       <view>房源介绍</view>
+      </view>
+      <scroll-view class="modal-content-detail" scroll-y="true">
+        <view class="h4">摘要</view>
+        <view class="span">.....</view>
+        <view class="h4">详情</view>
+        <view class="span">{{item.introduce}}</view>
+      </scroll-view>
+    </view>
+  </modal>
+
+  <modal
+    position="bottom"
+    main-class="modal"
+    show="{{faciModalShow}}"
+    bindclose="closeModal">
+    <view class="modal-content">
+      <view class="modal-content-title">
+       <view>便利设施</view>
+      </view>
+      <scroll-view class="modal-content-detail" scroll-y="true">
+        <view class="h4">基础设施</view>
+        <view>
+          <block wx:for="{{item.infrastArra}}" wx:key="index">
+            <view wx:if="{{item=='暖气'}}" class="faci-icon">
+              <view class="iconfont icon-nuanqi"></view>
+              <view class="span">暖气</view>
+            </view>
+            <view wx:elif="{{item=='熨斗'}}" class="faci-icon">
+              <view class="iconfont icon-yundou"></view>
+              <view class="span">熨斗</view>
+            </view>
+            <view wx:elif="{{item=='电脑'}}" class="faci-icon">
+              <view class="iconfont icon-diannao"></view>
+              <view class="span">电脑</view>
+            </view>
+            <view wx:elif="{{item=='衣架'}}" class="faci-icon">
+              <view class="iconfont icon-yijia"></view>
+              <view class="span">衣架</view>
+            </view>
+            <view wx:elif="{{item=='洗发水'}}" class="faci-icon">
+              <view class="iconfont icon-xifashui"></view>
+              <view class="span">洗发水</view>
+            </view>
+            <view wx:elif="{{item=='空调'}}" class="faci-icon">
+              <view class="iconfont icon-xue"></view>
+              <view class="span">空调</view>
+            </view>
+            <view wx:elif="{{item=='电视'}}" class="faci-icon">
+              <view class="iconfont icon-dianshi"></view>
+              <view class="span">电视</view>
+            </view>
+            <view wx:elif="{{item=='厨房'}}" class="faci-icon">
+              <view class="iconfont icon-chufang"></view>
+              <view class="span">厨房</view>
+            </view>
+            <view wx:elif="{{item=='WIFI'}}" class="faci-icon">
+              <view class="iconfont icon-WIFI"></view>
+              <view class="span">WIFI</view>
+            </view>
+            <view wx:elif="{{item=='洗衣机'}}" class="faci-icon">
+              <view class="iconfont icon-xiyiji"></view>
+              <view class="span">洗衣机</view>
+            </view>
+            <view wx:elif="{{item=='微波炉'}}" class="faci-icon">
+              <view class="iconfont icon-weibolu"></view>
+              <view class="span">微波炉</view>
+            </view>
+            <view wx:elif="{{item=='热水沐浴'}}" class="faci-icon">
+              <view class="iconfont icon-reshui"></view>
+              <view class="span">热水沐浴</view>
+            </view>
+            <view wx:elif="{{item=='吹风机'}}" class="faci-icon">
+              <view class="iconfont icon-chuifengji"></view>
+              <view class="span">吹风机</view>
+            </view>
+            <view wx:elif="{{item=='窗户'}}" class="faci-icon">
+              <view class="iconfont icon-chuanghu"></view>
+              <view class="span">窗户</view>
+            </view>
+            <view wx:else class="faci-icon">
+              <view class="iconfont icon-dui"></view>
+              <view class="span">{{item}}</view>
+            </view>
+          </block>
+        </view>
+        <view class="h4">安全设施</view>
+        <view>
+          <block wx:for="{{item.safefaciArra}}" wx:key="index">
+            <view wx:if="{{item=='烟雾报警器'}}" class="faci-icon">
+              <view class="iconfont icon-SmokeDetector"></view>
+              <view class="span">烟雾报警器</view>
+            </view>
+            <view wx:elif="{{item=='CO报警器'}}" class="faci-icon">
+              <view class="iconfont icon-CObaojingqibeifen"></view>
+              <view class="span">CO报警器</view>
+            </view>
+            <view wx:elif="{{item=='灭火器'}}" class="faci-icon">
+              <view class="iconfont icon-miehuoqi"></view>
+              <view class="span">灭火器</view>
+            </view>
+            <view wx:else class="faci-icon">
+              <view class="iconfont icon-dui"></view>
+              <view class="span">{{item}}</view>
+            </view>
+          </block>
+        </view>
+        <view class="h4">配套设施</view>
+        <view class="icon-contain">
+          <block wx:for="{{item.supfaciArra}}" wx:key="index">
+            <view wx:if="{{item=='电梯'}}" class="faci-icon">
+              <view class="iconfont icon-dianti"></view>
+              <view class="span">电梯</view>
+            </view>
+            <view wx:elif="{{item=='免费停车位'}}" class="faci-icon">
+              <view class="iconfont icon-tingchewei"></view>
+              <view class="span">免费停车位</view>
+            </view>
+            <view wx:else class="faci-icon">
+              <view class="iconfont icon-dui"></view>
+              <view class="span">{{item}}</view>
+            </view>
+          </block>
+        </view>
+      </scroll-view>
+    </view>
+  </modal>
+
+  <!-- footer -->
+  <view class="footer">
+    <view class="footer-content">
+      <view class="focon-detail">
+        <view class="price">
+          <text class="p0">¥ {{item.price}}</text>
+          <text class="p2">{{nightNum!=0?" × "+nightNum+" 晚":' 每晚'}}</text>
+        </view>
+        <view class="p2">{{selectDate.start.year != curDateObj.curYear && selectDate.start.year?selectDate.start.year+'年':''}}{{selectDate.start.month?selectDate.start.month+'月':''}}{{selectDate.start.day?selectDate.start.day+'日 - ':''}}{{selectDate.end.year != selectDate.start.year && selectDate.end.year?selectDate.end.year+'年':''}}{{selectDate.end.month != selectDate.start.month && selectDate.end.month?selectDate.end.month+'月':''}}{{selectDate.end.day?selectDate.end.day+'日':''}}</view>
+        <view wx:if="{{item.evaluation!=0}}" class="eval">
+          <block wx:for="{{item.evaluation}}" wx:key="index">
+            <image src="/images/wujiaoxing.png" mode="aspectFill"></image>
+          </block>
+          <block wx:for="{{5-item.evaluation}}" wx:key="index">
+            <image src="/images/wujiaoxing_gray.png" mode="aspectFill"></image>
+          </block>
+        </view>
+      </view>
+      <block wx:if="{{!bookable}}">
+        <view class="focon-btn">
+          <navigator hover-class="none" url="/packages/calendar/pages/index/index" class="navig">查看可定状态</navigator>
+        </view>
+      </block>
+      <block wx:if="{{bookable}}">
+        <view class="focon-btn">
+          <navigator hover-class="none" url="/packages/order/pages/pay/pay?iid={{item.id}}&title={{item.title}}&price={{item.price}}&discount={{item.discount}}&type={{item.type}}&restype={{item.restype}}&room={{item.room}}&bedNum={{item.bedNum}}&image={{URLUtil.encodeURIComponent(item.images[0])}}" class="navig">预订</navigator>
+          <wxs module="URLUtil">
+            module.exports = {
+              encodeURIComponent: function(url){
+                return encodeURIComponent(url);
+              }
+            }
+          </wxs>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

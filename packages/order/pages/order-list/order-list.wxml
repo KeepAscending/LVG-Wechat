@@ -1,0 +1,88 @@
+<!--packages/order/pages/order-list/order-list.wxml-->
+<view class="container">
+  <!-- 滑动按钮 -->
+  <view class="swiper-tabwrap">
+    <view class="swiper-tab">
+      <view class="tab {{currentTab==0?'active':''}}"  data-index="0" bindtap="switchTab">全部订单</view>
+      <view class="tab {{currentTab==1?'active':''}}"  data-index="1" bindtap="switchTab">有效订单</view>
+      <view class="tab {{currentTab==2?'active':''}}"  data-index="2" bindtap="switchTab">待支付订单</view>
+    </view>
+  </view>
+
+  <!-- 滑动门 -->
+  <swiper current="{{currentTab}}" bindchange="onChange" style="height:{{windowHeight-70}}px;margin-top:70px;" class="swiper-box">
+      <swiper-item>
+        <scroll-view wx:if="{{currentTab==0}}" bindscrolltolower="onScrollToLower" class="scroll-view" scroll-y="true">
+          <view wx:for="{{list}}" wx:key="index">
+            <view class="orderwrap">
+              <navigator hover-class="none" class="order" url="/packages/order/pages/order-detail/order-detail?order={{Utils.objToJson(item)}}" style="width:{{screenWidth}}px">
+                <image src="{{mediaHost}}{{item.images[0]}}" mode="aspectFill"></image>
+                <view class="orderinfo">
+                  <view>{{item.title}}</view>
+                  <view>{{Utils.getDateStr(item.intime)}} -- {{Utils.getDateStr(item.outtime)}}</view>
+                  <view>¥ {{item.payment}} {{item.status==1?'（ 有效订单 ）':item.status==2?'（ 待支付 ）':item.status==3?'（ 已完成 ）':item.status==4?'（ 已取消 ）':'（ 支付超时 ）'}}</view>
+                </view>
+              </navigator>
+              <navigator wx:if="{{item.status==1}}" hover-class="none" class="rebook" url="/packages/items/pages/items-detail/items-detail?id={{item.itemId}}">取消预订</navigator>
+              <navigator wx:if="{{item.status==2}}" hover-class="none" class="rebook" url="/packages/items/pages/items-detail/items-detail?id={{item.itemId}}">去支付</navigator>
+              <navigator wx:if="{{item.status==3 || item.status==4 || item.status==5}}" hover-class="none" class="rebook" url="/packages/items/pages/items-detail/items-detail?id={{item.itemId}}">再次预订</navigator>
+            </view>
+          </view>
+          <block wx:if="{{total==0}}">
+            <view>你还没有预订过房源，点击“开始探索”开启下一段旅程吧</view>
+            <navigator hover-class="more-active" url="/packages/items/pages/items-list/items-list" class="more">开始探索</navigator>
+          </block>
+        </scroll-view>
+      </swiper-item>
+      <swiper-item>
+        <scroll-view wx:if="{{currentTab==1}}" bindscrolltolower="onScrollToLower" class="scroll-view" scroll-y="true">
+          <block wx:for="{{list}}" wx:key="index">
+            <view class="orderwrap">
+              <navigator hover-class="none" class="order" url="/packages/order/pages/order-detail/order-detail?order={{Utils.objToJson(item)}}" style="width:{{screenWidth}}px">
+                <image src="{{mediaHost}}{{item.images[0]}}" mode="aspectFill"></image>
+                <view class="orderinfo">
+                  <view>{{item.title}}</view>
+                  <view>{{Utils.getDateStr(item.intime)}} -- {{Utils.getDateStr(item.outtime)}}</view>
+                  <view>¥ {{item.payment}} （ 有效订单 ）</view>
+                </view>
+              </navigator>
+              <navigator hover-class="none" class="rebook" url="/packages/items/pages/items-detail/items-detail?order={{Utils.objToJson(item)}}">取消预订</navigator>
+            </view>
+          </block>
+          <view wx:if="{{total==0}}">当前没有有效订单，去首页探索下一段奇妙旅程吧</view> 
+        </scroll-view>
+      </swiper-item>
+      <swiper-item>
+        <scroll-view wx:if="{{currentTab==2}}" bindscrolltolower="onScrollToLower" class="scroll-view" scroll-y="true">
+          <block wx:for="{{list}}" wx:key="index">
+            <view class="orderwrap">
+              <navigator hover-class="none" class="order" url="/packages/order/pages/order-detail/order-detail?id={{order.id}}" style="width:{{screenWidth}}px">
+                <image src="{{mediaHost}}{{item.images[0]}}" mode="aspectFill"></image>
+                <view class="orderinfo">
+                  <view>{{item.title}}</view>
+                  <view>{{Utils.getDateStr(item.intime)}} -- {{Utils.getDateStr(item.outtime)}}</view>
+                  <view>¥ {{item.payment}} （ 待支付 ）</view>
+                </view>
+              </navigator>
+              <navigator hover-class="none" class="rebook" url="/packages/items/pages/items-detail/items-detail?id={{item.itemId}}">去支付</navigator>
+            </view>
+          </block>
+          <view wx:if="{{total==0}}">当前没有待支付的订单</view> 
+        </scroll-view>
+      </swiper-item>
+  </swiper>
+</view>
+
+<wxs module="Utils">
+  module.exports = {
+    getDateStr: function(time){
+      var date = getDate(time); 
+      var month = date.getMonth() + 1;
+      var day = date.getDate();
+      return date.getFullYear()+'-'+(month>=10?month:0+''+month)+'-'+(day>=10?day:0+''+day);
+    },
+    objToJson: function(obj){
+      return encodeURIComponent(JSON.stringify(obj));
+    }
+  }
+</wxs>

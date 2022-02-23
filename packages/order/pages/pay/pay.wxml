@@ -1,0 +1,54 @@
+<!--packages/order/pages/pay/pay.wxml-->
+<view class="container">
+  <view class="item">
+    <view class="item-info">
+      <view class="detail">
+        <view class="h2">{{title}}</view>
+        <text>{{type}}/{{restype}} · {{room}}间卧室 · {{bedNum}}张床</text>
+      </view>
+      <image src="{{image}}" mode="aspectFill"></image>
+    </view>
+    <navigator hover-class="none" url="/packages/calendar/pages/index/index" class="book-date">{{selectDate.start.year != curDateObj.curYear?selectDate.start.year+'年':''}}{{selectDate.start.month+'月'}}{{selectDate.start.day+'日 - '}}{{selectDate.end.year != selectDate.start.year?selectDate.end.year+'年':''}}{{selectDate.end.month != selectDate.start.month?selectDate.end.month+'月':''}}{{selectDate.end.day+'日'}}{{' · '+nightNum+'晚'}}</navigator>
+  </view>
+  <view class="consumer-info">
+    <view class="h2">入住人信息</view>
+    <view>
+      <view>姓名</view>
+      <input class="input" value="{{name}}" data-index="1" bindinput="onInputValue" maxlength="10" placeholder="输入姓名 （必填）" placeholder-style="text-align:right;"/> 
+    </view>
+    <view>
+      <view>手机号</view>
+      <input class="input" value="{{phone}}" data-index="2" bindinput="onInputValue" maxlength="16" placeholder="输入手机号 （必填）" placeholder-style="text-align:right;"/>
+    </view>
+  </view>
+  <view class="price-info">
+    <view class="h2">价格明细</view>
+    <view>
+      <view>¥ {{price}} × {{nightNum}} 晚</view>
+      <view>¥ {{total}}</view>
+    </view>
+    <view>
+      <view>折扣优惠</view>
+      <view>- ¥ {{discountMoney}}</view>
+    </view>
+    <view>
+      <view>礼金券</view>
+      <view>- ¥ {{coupons}}</view>
+    </view>
+    <view>
+      <view>服务费</view>
+      <view>¥ {{service}}</view>
+    </view>
+    <view>
+      <view>总费用</view>
+      <view>¥ {{payment}}</view>
+    </view>
+  </view>
+</view>
+<!-- footer -->
+<view class="footer">
+  <view class="footer-content">
+    <view></view>
+    <view bindtap="onPayment" class="focon-btn">微信支付</view>
+  </view>
+</view>

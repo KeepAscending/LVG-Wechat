@@ -1,0 +1,223 @@
+<!--packages/items/pages/items-list/items-list.wxml-->
+<view class="container">
+  <!--搜索栏-->
+  <view class="search-bar">
+    <view class="search-wrapper {{untouch?'untouch':''}}">
+      <!--搜索框-->
+      <view class="search-box">
+        <view>
+          <icon type="search" size="14"></icon>
+        </view>
+        <view>
+          <input
+            confirm-type="search"
+            class="input"
+            placeholder="输入目的地、城市"
+            value="{{keywords}}"
+            bindconfirm="onConfirm"
+            bindinput="onInput">
+          </input>
+        </view>
+        <view class="bar-date">
+          <navigator hover-class="none" url="/packages/calendar/pages/index/index">{{selectDate.start.month?(selectDate.start.month>=10?selectDate.start.month+'.':'0'+selectDate.start.month+'.'):''}}{{selectDate.start.day?(selectDate.start.day>=10?selectDate.start.day+'-':'0'+selectDate.start.day+'-'):''}}{{selectDate.end.month?(selectDate.end.month>=10?selectDate.end.month+'.':'0'+selectDate.end.month+'.'):''}}{{selectDate.end.day?(selectDate.end.day>=10?selectDate.end.day:'0'+selectDate.end.day):'添加日期'}}</navigator>
+        </view>
+      </view>
+      <!--地图-->
+      <view class="bar-map" bindtap="openMap">
+        <view class="iconfont icon-9dituicon"></view>
+        <view class="span">地图</view>
+      </view>
+    </view>
+    <!--选项卡-->
+    <view class="bar-options">
+      <view class="options-people {{option==1?'active':''}} {{people==0?'':'active02'}}" bindtap="openModal" data-index="1">
+        <view class="span">{{people==0?'人数':(people==8?people+'位+':people+'位')}}</view>
+        <view class="iconfont icon-triangle-down-small"></view>
+      </view>
+      <view class="options-price {{option==2?'active':''}} {{saveminp==0&&savemaxp==501||price_save==0?'':'active02'}}" bindtap="openModal" data-index="2">
+        <view class="span">{{saveminp==0&&savemaxp==501||price_save==0?'价格':(saveminp==501?'¥500+':'¥'+saveminp+' - '+'¥'+(savemaxp==501?'500+':savemaxp))}}</view>
+        <view class="iconfont icon-triangle-down-small"></view>
+      </view>
+      <view class="options-order {{option==3?'active':''}} {{order==0||order==1?'':'active02'}}" bindtap="openModal" data-index="3">
+        <view class="span">{{orderStr}}</view>
+        <view class="iconfont icon-triangle-down-small"></view>
+      </view>
+      <view class="options-more {{option==4?'active':''}} {{more_save==0?'':'active02'}}" bindtap="openModal" data-index="4">
+        <view class="span">更多{{more_save==0?'':' · '+more_save}}</view>
+        <view class="iconfont icon-triangle-down-small"></view>
+      </view>
+    </view>
+    <!-- modal -->
+    <modal
+      position="top"
+      useAnimation="{{flase}}"
+      main-class="modal-main"
+      show="{{modalShow}}"
+      bindclose="closeModal">
+      <!-- modal-people -->
+      <view wx:if="{{option==1}}" class="modal-content">
+        <view class="modal-people">
+          <block wx:for="{{[1,2,3,4,5,6,7,8]}}" wx:key="index">
+            <view class="{{people==item?'active':''}}" bindtap="onPeople" data-people="{{item}}">{{(item==8?item+'位+':item+'位')}}</view>
+          </block>
+        </view>
+      </view>
+      <!-- modal-price -->
+      <view wx:if="{{option==2}}" class="modal-content">
+        <view class="modal-price">
+          <view class="boldprice">{{(minprice==0&&maxprice==501)||maxprice==0?'不限':(minprice==501?'¥500+':'¥'+minprice+' - '+'¥'+(maxprice==501?'500+':maxprice))}}</view>
+          <view>Min</view>
+          <slider bindchanging="onSlider" bindchange="onSlider" data-index="1" min="0" max="501" value="{{minprice}}" block-size="16" block-color="rgb(0, 132, 137)" activeColor="rgb(0, 132, 137)"></slider>
+          <view>Max</view>
+          <slider bindchanging="onSlider" bindchange="onSlider" data-index="2" min="0" max="501" value="{{maxprice}}" block-size="16" block-color="rgb(0, 132, 137)" activeColor="rgb(0, 132, 137)"></slider>
+          <view class="multiprice">
+            <view class="{{price_index==1?'active':''}}" bindtap="changePrice" data-price="1">¥0 - ¥150</view>
+            <view class="{{price_index==2?'active':''}}" bindtap="changePrice" data-price="2">¥150 - ¥250</view>
+          </view>
+          <view class="multiprice">
+            <view class="{{price_index==3?'active':''}}" bindtap="changePrice" data-price="3">¥250 - ¥500</view>
+            <view class="{{price_index==4?'active':''}}" bindtap="changePrice" data-price="4">¥500 以上</view>
+          </view>
+          <view class="btn">
+            <view bindtap="priceReset">重置</view>
+            <view bindtap="priceSave">确定</view>
+          </view>
+        </view>
+      </view>
+      <!-- modal-order -->
+      <view wx:if="{{option==3}}" class="modal-content">
+        <view class="modal-order">
+          <view class="{{order==1?'active':''}}" bindtap="onOrder" data-order="1" data-orderstr="排序">
+            <text>综合排序(默认)</text>
+            <icon class="suc" type="success" size="14" color="rgb(0, 132, 137)"></icon>
+          </view>
+          <view class="{{order==2?'active':''}}" bindtap="onOrder" data-order="2" data-orderstr="好评优先">
+            <text>好评优先</text>
+            <icon class="suc" type="success" size="14" color="rgb(0, 132, 137)"></icon>
+          </view>
+          <view class="{{order==3?'active':''}}" bindtap="onOrder" data-order="3" data-orderstr="价格从低到高">
+            <text>价格从低到高</text>
+            <icon class="suc" type="success" size="14" color="rgb(0, 132, 137)"></icon>
+          </view>
+          <view class="{{order==4?'active':''}}" bindtap="onOrder" data-order="4" data-orderstr="价格从高到低">
+            <text>价格从高到低</text>
+            <icon class="suc" type="success" size="14" color="rgb(0, 132, 137)"></icon>
+          </view>
+        </view>
+      </view>
+      <!-- modal-more -->
+      <view wx:if="{{option==4}}" class="modal-content">
+        <view class="modal-more">
+          <scroll-view class="scrollmore" scroll-y="true">
+            <!--卧室和床铺-->
+            <view class="bold">卧室和床铺</view>
+            <view class="flexmore">
+              <view>
+                <view>床铺数量</view>
+                <view>
+                  <text bindtap="numMinus" data-index="1" class="text1">－</text>
+                  <text>{{beds}}</text>
+                  <text bindtap="numAdd" data-index="1" class="text1">＋</text>
+                </view>
+              </view>
+              <view>
+                <view>卧室</view>
+                <view>
+                  <text bindtap="numMinus" data-index="2" class="text1">－</text>
+                  <text>{{room}}</text>
+                  <text bindtap="numAdd" data-index="2" class="text1">＋</text>
+                </view>
+              </view>
+              <view>
+                <view>卫生间</view>
+                <view>
+                  <text bindtap="numMinus" data-index="3" class="text1">－</text>
+                  <text>{{toilet}}</text>
+                  <text bindtap="numAdd" data-index="3" class="text1">＋</text>
+                </view>
+              </view>
+            </view>
+            <!--房源类型-->
+            <view class="bold">房源类型</view>
+            <view bindtap="numMinus" data-index="4" data-type="整个房源" class="inline {{restype_index==4?'active':''}}">
+              <view>整个房源</view>
+              <view>独享房源的所有空间，无需与他人共用</view>
+            </view>
+            <view bindtap="numMinus" data-index="5" data-type="独立房间" class="inline {{restype_index==5?'active':''}}">
+              <view>独立房间</view>
+              <view>有自己的单独卧室，与他人共用其他空间</view>
+            </view>
+            <view class="border"></view>
+            <!--基础设施-->
+            <view class="bold">基础设施</view>
+            <view class="faci">
+              <block wx:for="{{infrast}}" wx:key="index">
+                <view bindtap="onFaci" data-name="1" data-index="{{index}}" class="{{item.selected?'active':''}}">{{item.str}}</view>
+              </block>
+            </view>
+            <view class="border"></view>
+            <!--安全设施-->
+            <view class="bold">安全设施</view>
+            <view class="faci">
+              <block wx:for="{{safefaci}}" wx:key="index">
+                <view bindtap="onFaci" data-name="2" data-index="{{index}}" class="{{item.selected?'active':''}}">{{item.str}}</view>
+              </block>
+            </view>
+            <view class="border"></view>
+            <!--配套设施-->
+            <view class="bold">配套设施</view>
+            <view class="faci">
+              <block wx:for="{{supfaci}}" wx:key="index">
+                <view bindtap="onFaci" data-name="3" data-index="{{index}}" class="{{item.selected?'active':''}}">{{item.str}}</view>
+              </block> 
+            </view>
+          </scroll-view>
+          <view class="btn">
+            <view bindtap="moreReset">重置</view>
+            <view bindtap="moreSave">确定</view>
+          </view>
+        </view>
+      </view>
+    </modal>
+  </view>
+
+  <!--房源列表-->
+  <view class="items-list">
+    <block wx:for="{{list}}" wx:key="index">
+      <view class="items-card">
+        <navigator hover-class="none" url="/packages/items/pages/items-detail/items-detail?id={{item.id}}">
+          <swiper class="swiper" circular="true" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+            <block wx:for="{{item.images}}" wx:key="index">
+              <swiper-item>
+                <image src="{{mediaHost}}{{item}}" mode="aspectFill"></image>
+              </swiper-item>
+            </block>
+          </swiper>
+          <view class="overview">{{item.restype}}·{{item.room}}室·{{item.toilet}}卫·{{item.bedNum}}床·宜住{{item.people}}人</view>
+          <view class="title">{{item.title}}</view>
+          <view class="price">
+            <text class="p0">¥{{item.price}} </text>
+            <text class="p1">/晚</text>
+          </view>
+          <view class="host">
+            <image src="{{item.hostImage}}" mode="aspectFill"></image>
+          </view>
+          <view wx:if="{{item.evaluation!=0}}" class="eval">
+            <block wx:for="{{item.evaluation}}" wx:key="index">
+              <image src="/images/wujiaoxing.png" mode="aspectFill"></image>
+            </block>
+            <block wx:for="{{5-item.evaluation}}" wx:key="index">
+              <image src="/images/wujiaoxing_gray.png" mode="aspectFill"></image>
+            </block>
+          </view>
+        </navigator>
+        <view class="collect" bindtap="changeCollect" data-curindex="{{index}}">
+          <image wx:if="{{!item.collect}}" src="/images/xin_white.png" mode="widthFix"></image>
+          <image wx:else src="/images/xin_red.png" mode="widthFix"></image>
+        </view>
+      </view>
+    </block>
+  </view>
+  <!-- 加载更多 -->
+  <load-more has-more="{{hasMore}}" />
+</view>

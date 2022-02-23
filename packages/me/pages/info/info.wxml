@@ -1,0 +1,42 @@
+<!--packages/me/pages/info/info.wxml-->
+<view class="container">
+  <cell custom-class="cell-custom">
+    <view slot="text">
+       <view class="h1">头像</view>
+       <view class="span" bindtap="uploadAvatar" >点击更换</view>
+    </view>
+    <view slot="image">
+      <image src="{{userinfo.wx_headpic?userinfo.wx_headpic:'/images/headpic.png'}}" mode="aspectFill"/>
+    </view>
+  </cell>
+
+  <cell custom-class="cell-custom" clickabled="{{true}}">
+    <view slot="text">
+       <view class="h1">昵称</view>
+       <text>{{userinfo.wx_nickname?userinfo.wx_nickname:"Hello"}}</text>
+    </view>
+    <view slot="right">
+      <image src="/images/right.png" mode="aspectFill"/>
+    </view>
+  </cell>
+
+  <cell custom-class="cell-custom" clickabled="{{true}}">
+    <view slot="text">
+       <view class="h1">手机号</view>
+       <text>{{userinfo.phone?userinfo.phone:"未绑定"}}</text>
+    </view>
+    <view slot="right">
+      <image src="/images/right.png" mode="aspectFill"/>
+    </view>
+  </cell>
+
+  <cell custom-class="cell-custom" clickabled="{{true}}">
+    <view slot="text">
+       <view class="h1">邮箱地址</view>
+       <text>{{userinfo.email?userinfo.email:"未绑定"}}</text>
+    </view>
+    <view slot="right">
+      <image src="/images/right.png" mode="aspectFill"/>
+    </view>
+  </cell>
+</view>

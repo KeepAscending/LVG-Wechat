@@ -1,0 +1,108 @@
+{
+  "pages":[
+    "packages/main/pages/index/index",
+    "packages/main/pages/authorize/authorize",
+    "packages/main/pages/collection/collection",
+    "packages/main/pages/message/message",
+    "packages/main/pages/mine/mine"
+  ],
+  "subpackages":[
+    {
+      "root": "packages/me",
+      "name": "me",
+      "pages": [
+        "pages/info/info"
+      ]
+    },
+    {
+      "root": "packages/items",
+      "name": "items",
+      "pages": [
+        "pages/items-list/items-list",
+        "pages/items-detail/items-detail"
+      ]
+    },
+    {
+      "root": "packages/calendar",
+      "name": "calendar",
+      "pages": [
+        "pages/index/index"
+      ]
+    },
+    {
+      "root": "packages/order",
+      "name": "order",
+      "pages": [
+        "pages/pay/pay",
+        "pages/order-list/order-list",
+        "pages/order-detail/order-detail",
+        "pages/order-eval/order-eval"
+      ]
+    },
+    {
+      "root": "packages/landlordMode/main",
+      "name": "landlordMode",
+      "pages": [
+        "pages/inbox/inbox",
+        "pages/housing/housing",
+        "pages/landlord/landlord"
+      ]
+    },
+    {
+      "root": "packages/landlordMode/houseRes",
+      "name": "hostHouse",
+      "pages": [
+        "pages/newRes/newRes"
+      ]
+    },
+    {
+      "root": "packages/landlordMode/item",
+      "name": "hostItem",
+      "pages": [
+        "pages/newItem/newItem",
+        "pages/showItem/showItem"
+      ]
+    },
+    {
+      "root": "packages/landlordMode/order",
+      "name": "hostOrder",
+      "pages": [
+        "pages/order-list/order-list",
+        "pages/order-detail/order-detail"
+      ]
+    }
+  ],
+  "preloadRule": {
+    "packages/main/pages/index/index": {
+      "packages": [
+        "items",
+        "calendar"
+      ]
+    },
+    "packages/main/pages/mine/mine": {
+      "packages": [
+        "me",
+        "order"
+      ]
+    },
+    "packages/landlordMode/main/pages/landlord/landlord": {
+      "packages": [
+        "hostOrder"
+      ]
+    },
+    "packages/landlordMode/main/pages/housing/housing": {
+      "packages": [
+        "hostHouse",
+        "hostItem"
+      ]
+    }
+  },
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "LVG1.0",
+    "navigationBarTextStyle":"black"
+  },
+  
+  "sitemapLocation": "sitemap.json"
+}

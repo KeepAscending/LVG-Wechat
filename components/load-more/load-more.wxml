@@ -1,0 +1,2 @@
+<!--components/load-more.wxml-->
+<view class="load-more">{{hasMore?'加载中...':'-- 没有了 --'}}</view>

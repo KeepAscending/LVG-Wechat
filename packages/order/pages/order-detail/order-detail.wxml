@@ -1,0 +1,146 @@
+<!--packages/order/pages/order-detail/order-detail.wxml-->
+<!-- 页首 -->
+<view class="header">
+  <image src="/images/liuticai.jpg" mode="aspectFill"></image>
+  <view>
+    <block wx:if="{{status==1}}">
+      <view class="h4">待使用</view>
+      <view>您的订单已支付，祝您旅途愉快</view>
+      <view>若要取消订单，请在当天18:00前取消</view>
+      <view hover-class="hover" class="btn">
+        <navigator hover-class="none" url="##">取消订单</navigator>
+      </view>
+    </block>
+    <block wx:if="{{status==2}}">
+      <view class="h4">待支付</view>   
+      <view>该订单会在15分钟后自动取消，请您尽快支付</view>
+      <view>倒计时</view>
+      <view hover-class="hover" class="btn">
+        <navigator hover-class="none" url="##">去支付</navigator>
+      </view>
+    </block>
+    <block wx:if="{{status==3}}">
+      <view class="h4">已消费</view>
+      <view>您的订单已消费，期待您再次预定</view>
+      <view wx:if="{{point!=0}}">
+        <navigator url="##" hover-class="none" class="flex">
+          <view>我的评价</view>
+          <view class="eval">
+            <block wx:for="{{point}}" wx:key="index">
+              <image src="/images/wujiaoxing.png" mode="aspectFill"></image>
+            </block>
+            <block wx:for="{{5-point}}" wx:key="index">
+              <image src="/images/wujiaoxing_gray.png" mode="aspectFill"></image>
+            </block>
+          </view>
+        </navigator>
+      </view>
+      <view wx:if="{{point==0}}">
+        <navigator url="/packages/order/pages/order-eval/order-eval?oid={{order.id}}" hover-class="none" class="flex">
+          <view>待评价</view>
+          <view class="eval">
+            <image src="/images/right.png" mode="aspectFill"></image>
+          </view>
+        </navigator>
+      </view>
+      <view hover-class="hover" class="btn">
+        <navigator hover-class="none" url="##">再次预订</navigator>
+      </view>
+    </block>
+    <block wx:if="{{status==4}}">
+      <view class="h4">订单已取消</view>
+      <view>您的订单已取消，请重新下单</view>
+      <view hover-class="hover" class="btn">
+        <navigator hover-class="none" url="##">再次预订</navigator>
+      </view>
+    </block>
+    <block wx:if="{{status==5}}">
+      <view class="h4">支付超时</view>
+      <view>您的订单已超过可支付时间，请重新下单</view>
+      <view hover-class="hover" class="btn">
+        <navigator hover-class="none" url="##">再次预订</navigator>
+      </view>
+    </block>
+  </view>
+</view>
+<!-- 内容 -->
+<view class="container">
+  <view class="item">
+    <view class="item-info">
+      <view>
+        <view class="h2">{{order.title}}</view>
+        <text>{{order.type}}/{{order.restype}} · {{order.room}}间卧室 · {{order.bedNum}}张床</text>
+      </view>
+      <image src="{{mediaHost}}{{order.images[0]}}" mode="aspectFill"></image>
+    </view>
+    <view class="book-date">{{Utils.getDateStr(order.intime)}} -- {{Utils.getDateStr(order.outtime)}} · {{order.night}}晚</view>
+  </view>
+  <view class="price-info">
+    <view class="h2">价格明细</view>
+    <view>
+      <view>¥ {{order.price}} × {{order.night}} 晚</view>
+      <view>¥ {{order.total}}</view>
+    </view>
+    <view>
+      <view>折扣优惠</view>
+      <view>- ¥ {{order.discount}}</view>
+    </view>
+    <view>
+      <view>礼金券</view>
+      <view>- ¥ {{order.coupons}}</view>
+    </view>
+    <view>
+      <view>服务费</view>
+      <view>¥ {{service}}</view>
+    </view>
+    <view>
+      <view>总费用</view>
+      <view>¥ {{order.payment}}</view>
+    </view>
+  </view>
+  <view class="consumer-info">
+    <view class="h2">入住人信息</view>
+    <view>
+      <view>姓名</view>
+      <view>{{order.cusName}}</view>
+    </view>
+    <view>
+      <view>手机号</view>
+      <view>{{order.cusPhone}}</view>
+    </view>
+  </view>
+  <view class="order-info">
+    <view class="h2">订单信息</view>
+    <view>
+      <view>订单号</view>
+      <view>{{order.id}}</view>
+    </view>
+    <view>
+      <view>下单时间</view>
+      <view>{{Utils.getDateDetail(order.created)}}</view>
+    </view>
+  </view>
+</view>
+<!-- 页脚 -->
+<view class="footer">
+  <view hover-class="hover" bindtap="onDelete">删除订单</view>
+</view>
+
+<wxs module="Utils">
+  module.exports = {
+    getDateStr: function(time){
+      var date = getDate(time); 
+      var month = date.getMonth() + 1;
+      var day = date.getDate();
+      return date.getFullYear()+'-'+(month>=10?month:0+''+month)+'-'+(day>=10?day:0+''+day);
+    },
+    getDateDetail: function(time){
+      var date = getDate(time); 
+      var month = date.getMonth() + 1;
+      var day = date.getDate();
+      var h = date.getHours();
+      var m = date.getMinutes();
+      return date.getFullYear()+'-'+(month>=10?month:0+''+month)+'-'+(day>=10?day:0+''+day)+' '+(h>=10?h:0+''+h)+':'+(m>=10?m:0+''+m);
+    },
+  }
+</wxs>

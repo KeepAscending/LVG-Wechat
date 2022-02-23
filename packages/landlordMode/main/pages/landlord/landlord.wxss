@@ -1,0 +1,76 @@
+/* packages/landlordMode/pages/landlord/landlord.wxss */
+.container{
+  width: 85%;
+  margin: 0 auto;
+}
+
+.header{
+  position: relative;
+  height: 200rpx;
+}
+
+.userinfo{
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+.userinfo-nickname{
+  -webkit-flex: auto;
+  flex: auto;
+}
+.userinfo-nickname .h1{
+  margin-bottom: 5px;
+  font-size: 42rpx;
+  font-weight: bold;
+}
+
+.userinfo-nickname .span{
+  font-size: 24rpx;
+  color:  rgb(0, 132, 137);
+}
+
+.userinfo-headpic image{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  border: none;
+}
+
+.h2{
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.styles{
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  border-bottom: 1px solid rgb(230, 230, 230);
+  margin-bottom: 40rpx ;
+}
+
+.styles-item{
+  -webkit-flex: auto;
+  flex: auto;
+  padding-top: 45rpx;
+  padding-bottom: 32rpx;
+  text-align: center;
+}
+
+.styles-item .iconfont{
+  text-align: center;
+  font-size: 50rpx;
+}
+
+.styles-item view:nth-of-type(2){
+  font-size: 24rpx;
+}
+
+.landlord{
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30rpx;
+  font-size: 30rpx;
+}

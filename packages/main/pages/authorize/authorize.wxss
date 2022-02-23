@@ -1,0 +1,44 @@
+/* packages/main/pages/authorize/authorize.wxss */
+@import '/templates/btn/btn.wxss';
+
+.container{
+  padding-top: 200rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.btn{
+  margin-top: 100rpx;
+  border-radius: 5px;
+  background-color:rgb(1, 190, 2);
+}
+.login_logo{
+  margin-top: 30rpx;
+  text-align: center;
+  padding-bottom: 30rpx;
+  margin-bottom: 30rpx;
+  border-bottom: 2rpx solid rgb(240,240,240);
+}
+.login_logo image{
+  width: 160rpx;
+  height: 160rpx;
+}
+.login_logo text{
+  color: #666;
+  display: block;
+
+}
+.login_text text{
+  font-size: 34rpx;
+  color: #333;
+  margin-bottom: 30rpx;
+  display: block;
+}
+.login_text text:last-of-type{
+  color: #999;
+  font-size: 30rpx;
+  margin-bottom: 60rpx;
+}

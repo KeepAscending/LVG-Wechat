@@ -1,0 +1,9 @@
+<!--packages/landlordMode/pages/inbox/inbox.wxml-->
+<view class="container">
+  <view class="title">
+    <view>收件箱</view>
+    <view>和房客联系的消息会显示在这里</view>
+    <image src="/images/xiaoxi.jpg" mode="aspectFill"></image>
+  </view>
+</view>
+<landlordTab curNum="0"></landlordTab>

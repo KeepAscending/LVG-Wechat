@@ -1,0 +1,86 @@
+<!--packages/landlordMode/order/pages/order-list/order-list.wxml-->
+<view class="container">
+  <!-- 滑动按钮 -->
+  <view class="swiper-tabwrap">
+    <view class="swiper-tab">
+      <view class="tab {{currentTab==0?'active':''}}"  data-index="0" bindtap="switchTab">全部订单</view>
+      <view class="tab {{currentTab==1?'active':''}}"  data-index="1" bindtap="switchTab">有效订单</view>
+      <view class="tab {{currentTab==2?'active':''}}"  data-index="2" bindtap="switchTab">已取消订单</view>
+    </view>
+  </view>
+
+  <!-- 滑动门 -->
+  <swiper current="{{currentTab}}" bindchange="onChange" style="height:{{windowHeight-70}}px;margin-top:70px;" class="swiper-box">
+    <!-- 全部订单 -->
+    <swiper-item>
+      <scroll-view wx:if="{{currentTab==0}}" bindscrolltolower="onScrollToLower" class="scroll-view" scroll-y="true">
+        <view wx:for="{{list}}" wx:key="index">
+          <view class="orderwrap">
+            <navigator hover-class="none" class="order" url="/packages/landlordMode/order/pages/order-detail/order-detail?order={{Utils.objToJson(item)}}" style="width:{{screenWidth}}px">
+              <image src="{{mediaHost}}{{item.images[0]}}" mode="aspectFill"></image>
+              <view class="orderinfo">
+                <view>{{item.title}}</view>
+                <view>{{Utils.getDateStr(item.intime)}} -- {{Utils.getDateStr(item.outtime)}}</view>
+                <view>¥ {{item.payment}} {{item.status==1?'（ 有效订单 ）':item.status==3?'（ 已完成 ）':item.status==4?'（ 已取消订单 ）':''}}</view>
+              </view>
+            </navigator>
+          </view>
+        </view>
+        <block wx:if="{{total==0}}">
+          <view>你未接收到房源订单，赶紧去包装一下你的房源吧</view>
+        </block>
+      </scroll-view>
+    </swiper-item>
+    <!-- 有效订单 -->
+    <swiper-item>
+      <scroll-view wx:if="{{currentTab==1}}" bindscrolltolower="onScrollToLower" class="scroll-view" scroll-y="true">
+        <block wx:for="{{list}}" wx:key="index">
+          <view class="orderwrap">
+            <navigator hover-class="none" class="order" url="/packages/landlordMode/order/pages/order-detail/order-detail?order={{Utils.objToJson(item)}}" style="width:{{screenWidth}}px">
+              <image src="{{mediaHost}}{{item.images[0]}}" mode="aspectFill"></image>
+              <view class="orderinfo">
+                <view>{{item.title}}</view>
+                <view>{{Utils.getDateStr(item.intime)}} -- {{Utils.getDateStr(item.outtime)}}</view>
+                <view>¥ {{item.payment}} （ 有效订单 ）</view>
+              </view>
+            </navigator>
+          </view>
+        </block>
+        <view wx:if="{{total==0}}">当前没有有效订单</view> 
+      </scroll-view>
+    </swiper-item>
+    <!-- 已取消订单 -->
+    <swiper-item>
+      <scroll-view wx:if="{{currentTab==2}}" bindscrolltolower="onScrollToLower" class="scroll-view" scroll-y="true">
+        <block wx:for="{{list}}" wx:key="index">
+          <view class="orderwrap">
+            <navigator hover-class="none" class="order" url="/packages/landlordMode/order/pages/order-detail/order-detail?order={{Utils.objToJson(item)}}" style="width:{{screenWidth}}px">
+              <image src="{{mediaHost}}{{item.images[0]}}" mode="aspectFill"></image>
+              <view class="orderinfo">
+                <view>{{item.title}}</view>
+                <view>{{Utils.getDateStr(item.intime)}} -- {{Utils.getDateStr(item.outtime)}}</view>
+                <view>¥ {{item.payment}} （ 已取消订单 ）</view>
+              </view>
+            </navigator>
+          </view>
+        </block>
+        <view wx:if="{{total==0}}">当前没有已取消的订单</view> 
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+</view>
+
+<wxs module="Utils">
+  module.exports = {
+    getDateStr: function(time){
+      var date = getDate(time); 
+      var month = date.getMonth() + 1;
+      var day = date.getDate();
+      return date.getFullYear()+'-'+(month>=10?month:0+''+month)+'-'+(day>=10?day:0+''+day);
+    },
+    objToJson: function(obj){
+      return encodeURIComponent(JSON.stringify(obj));
+    }
+  }
+</wxs>
+

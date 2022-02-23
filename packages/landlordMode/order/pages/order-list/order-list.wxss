@@ -1,0 +1,90 @@
+/* packages/landlordMode/order/pages/order-list/order-list.wxss */
+.container{
+  width: 100%;
+  font-size: 26rpx;
+}
+
+.swiper-tabwrap{
+  width: 100%;
+  background-color: white;
+}
+
+/* 滑动按钮 */
+.swiper-tab{
+  z-index: 99;
+  position: fixed;
+  top: 0rpx;
+  left: 0rpx;
+  right: 0rpx;
+  margin: 0 auto;
+  width: 85%;
+  height: 100rpx;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20rpx;
+}
+
+.swiper-tab >view{
+  font-weight: bold;
+  padding-bottom: 22rpx;
+}
+
+.swiper-tab >view.active{
+  color: rgb(0, 132, 137);
+  padding-bottom: 20rpx;
+  border-bottom: 2rpx solid rgb(0, 132, 137);
+}
+
+/* 滑动切面 */
+.swiper-box .scroll-view{
+  width: 85%;
+  margin: 0 auto;
+  height: 100%;
+}
+
+.swiper-box .scroll-view ::-webkit-scrollbar{ /* 隐藏滚动条 */
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+/* order */
+.orderwrap{
+  padding-bottom: 40rpx;
+  border-bottom: 1rpx solid rgb(240, 240, 240);
+  margin-bottom: 40rpx;
+}
+
+.orderwrap .order{
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+}
+
+
+.orderwrap .order image{
+  flex: 0 0 auto;
+  display: block;
+  width: 230rpx;
+  height: 160rpx;
+  border-radius: 10rpx;
+  margin-right: 40rpx;
+}
+
+.orderwrap .order .orderinfo :nth-child(1){
+  margin-bottom: 10rpx;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* 显示两行就隐藏*/
+  display: -webkit-box;
+  -webkit-line-clamp: 1; 
+  -webkit-box-orient: vertical;
+}
+
+.orderwrap .order .orderinfo :nth-child(3){
+  margin-top: 10rpx;
+}
+

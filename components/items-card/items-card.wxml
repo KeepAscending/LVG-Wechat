@@ -1,0 +1,26 @@
+<!--components/items-card/items-card.wxml-->
+<view class="items-card">
+  <navigator hover-class="none" url="/packages/items/pages/items-detail/items-detail?id={{iid}}">
+    <view class="image">
+      <image src="{{image}}" mode="aspectFill"></image>
+    </view>
+    <view class="overview">{{housetype}}·{{room}}室{{toilet}}卫{{beds}}床·宜住{{people}}人</view>
+    <view class="title">{{title}}</view>
+    <view class="price">
+      <text class="p0">¥{{price}} </text>
+      <text class="p1">/晚</text>
+    </view>
+    <view wx:if="{{eval!=0}}" class="eval">
+      <block wx:for="{{eval}}" wx:key="index">
+        <image src="/images/wujiaoxing.png" mode="aspectFill"></image>
+      </block>
+      <block wx:for="{{5-eval}}" wx:key="index">
+        <image src="/images/wujiaoxing_gray.png" mode="aspectFill"></image>
+      </block>
+    </view>
+  </navigator>
+  <view class="collect" bind:tap="onChange" data-curindex="{{index}}">
+    <image wx:if="{{!iscollect}}" src="/images/xin_white.png" mode="widthFix"></image>
+    <image wx:else src="/images/xin_red.png" mode="widthFix"></image>
+  </view>
+</view>

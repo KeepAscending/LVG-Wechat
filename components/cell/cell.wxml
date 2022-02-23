@@ -1,0 +1,22 @@
+<!--components/cell/cell.wxml-->
+<view
+  class="cell custom-class"
+  hover-start-time="20"
+  hover-stay-time="50"
+  hover-class="{{clickabled?'cell--hover':''}}"
+  style="{{center?'align-items:center;':''}}"
+  bindtap="onClick">
+  <view class="cell__text">
+    <slot name="text" />
+  </view>
+  <view class="cell__image">
+    <slot name="image"/>
+  </view>
+  <view class="cell__unique">
+    <slot/>
+  </view>
+  <view class="cell__right">
+    <slot name="right"/>
+  </view>
+</view>
+

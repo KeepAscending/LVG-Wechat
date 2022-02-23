@@ -1,0 +1,392 @@
+/* packages/items/pages/items-list/items-list.wxss */
+page{
+  padding-top: 200rpx;
+}
+/* 搜索栏 */
+.search-bar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background-color: white;
+  padding: 10rpx 40rpx 30rpx 40rpx;
+  box-shadow: 0 0 6rpx  grey;
+  font-size: 24rpx;
+}
+
+/* 搜索框 */
+.search-wrapper, .search-wrapper >view{
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.search-wrapper{
+  position: relative;
+  z-index: 200;
+  margin-bottom: 30rpx;
+}
+
+.search-wrapper.untouch{
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.6;
+  color: rgb(153, 153, 153);
+}
+
+.search-wrapper .search-box{
+  width: 70%;
+  margin: 0 30rpx;
+  padding: 16rpx 30rpx;
+  border-radius: 6rpx;
+  box-shadow: 0 0 4rpx  grey;
+}
+
+.search-wrapper .bar-date{
+  font-weight: bold;
+  color: rgb(0, 132, 137);
+}
+
+/* 地图 */
+.search-bar .search-wrapper .bar-map{
+  width: 17%;
+}
+
+.search-bar .search-wrapper .bar-map .icon-9dituicon{
+  font-size: 36rpx;
+}
+
+.search-bar .search-wrapper .bar-map .span{
+  font-weight: bold;
+}
+
+/* 选项卡 */
+.search-bar .bar-options{
+  position: relative;
+  z-index: 200;
+}
+
+.search-bar .bar-options, .bar-options >view{
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+}
+
+.search-bar .bar-options, .bar-options >view:nth-of-type(1){
+  font-weight: bold;
+}
+
+.search-bar .bar-options >view.active{
+  color: rgb(0, 132, 137);
+}
+
+.search-bar .bar-options .active .icon-triangle-down-small{
+  transform: rotate(180deg);
+}
+
+.search-bar .bar-options >view.active02{
+  color: rgb(0, 132, 137);
+}
+
+/* modal */
+.modal-main{
+  width: 100%;
+  background-color: white;
+}
+
+.modal-main .modal-content{
+  width: 85%;
+  margin:200rpx auto 40rpx auto;
+  font-size: 26rpx;
+}
+
+/* modal-people */
+.modal-main .modal-content .modal-people{
+  text-align: center;
+}
+.modal-main .modal-content .modal-people >view{
+  display: inline-block;
+  width: 19.7%;
+  height: 60rpx;
+  margin: 16rpx;
+  border: 1rpx solid lightgray;
+  border-radius: 6rpx;
+  text-align: center;
+  line-height: 60rpx;
+}
+
+.modal-main .modal-content .modal-people >view.active{
+  background-color: rgb(0, 132, 137);
+  color: white;
+}
+
+/* modal-price */
+.modal-main .modal-content .modal-price >view{
+  margin-top: 30rpx;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-main .modal-content .modal-price .boldprice{
+  font-weight: bold;
+}
+
+.modal-main .modal-content .modal-price .multiprice view{
+  width: 45%;
+  height: 60rpx;
+  text-align: center;
+  border: 1rpx solid lightgray;
+  border-radius: 6rpx;
+  line-height: 60rpx;
+}
+
+.modal-main .modal-content .modal-price .multiprice view.active{
+  color: white;
+  background-color: rgb(0, 132, 137);
+}
+
+.modal-main .modal-content .btn{
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-main .modal-content .btn >view{
+  height: 80rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  text-align: center;
+  line-height: 80rpx;
+  margin-top: 40rpx;
+  border: 1rpx solid rgb(0, 132, 137);
+  border-radius: 6rpx;
+}
+
+.modal-main .modal-content .btn :first-child{
+  width: 30%;
+  color: rgb(0, 132, 137);
+}
+
+.modal-main .modal-content .btn :last-child{
+  width: 60%;
+  color: white;
+  background-color: rgb(0, 132, 137);
+}
+
+/* modal-order */
+.modal-main .modal-content .modal-order >view{
+  margin-top: 40rpx;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-main .modal-content .modal-order view .suc{
+  display: none;
+}
+
+.modal-main .modal-content .modal-order .active .suc{
+  display: unset;
+}
+
+/* modal-more */
+.modal-main .modal-content .modal-more .scrollmore{
+  width: 100%;
+  height: 740rpx;
+}
+
+.modal-main .modal-content .modal-more .scrollmore ::-webkit-scrollbar{ /* 隐藏滚动条 */
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.modal-main .modal-content .modal-more .scrollmore view{
+  margin: 10rpx 0;
+}
+
+.modal-main .modal-content .modal-more .scrollmore .bold{
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+/* modal-more 卧室和床铺 */
+.modal-main .modal-content .modal-more .scrollmore .flexmore{
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  border-bottom: 1rpx solid rgb(237, 237, 237);
+  padding-bottom: 20rpx;
+  margin-bottom: 40rpx;
+}
+
+.modal-main .modal-content .modal-more .scrollmore .flexmore text{
+  display: inline-block;
+  height: 30rpx;
+  width: 30rpx;
+  margin: 10rpx 20rpx;
+}
+.modal-main .modal-content .modal-more .scrollmore .flexmore .text1{
+  color: rgb(0, 132, 137);
+  font-weight: bold;
+}
+
+/* modal-more 房源类型 */
+.modal-main .modal-content .modal-more .scrollmore .inline{
+  display: inline-block;
+  width: 27%;
+  margin: 20rpx 30rpx 20rpx 0;
+  padding: 16rpx 20rpx 16rpx 16rpx;
+  border: 1rpx solid rgb(230, 230, 230);
+  border-radius: 6rpx;
+}
+
+.modal-main .modal-content .modal-more .scrollmore .inline :first-child{
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.modal-main .modal-content .modal-more .scrollmore .inline.active{
+  color: rgb(0, 132, 137);
+  border-color: rgb(0, 132, 137);
+}
+
+.modal-main .modal-content .modal-more .scrollmore .border{
+  width: 100%;
+  height: 1rpx;
+  margin: 40rpx 0;
+  border-top: 1rpx solid rgb(237, 237, 237);
+}
+
+/* modal-more 设施 */
+.modal-main .modal-content .modal-more .scrollmore .faci >view{
+  display: inline-block;
+  width: 27%;
+  text-align: center;
+  margin: 20rpx 20rpx 0 0;
+  padding: 16rpx 10rpx;
+  background-color: rgb(240, 240, 240);
+  border: 1rpx solid rgb(240, 240, 240);
+  border-radius: 6rpx;
+}
+
+.modal-main .modal-content .modal-more .scrollmore .faci >view.active{
+  color: rgb(0, 132, 137);
+  border-color: rgb(0, 132, 137);
+  background-color: unset;
+}
+
+/* 房型列表 */
+.items-list{
+  width: 85%;
+  margin: 20rpx auto;
+}
+
+.items-list .items-card{
+  position: relative;
+  margin: 40rpx 0;
+}
+
+.items-list .items-card .swiper{
+  height: 400rpx;
+  overflow: hidden;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.items-list .items-card .wx-swiper-dot{ /* 默认指示点的样式 */
+  width: 15rpx;
+  height: 15rpx;
+  background-color: lightgray;
+}    
+
+.items-list .items-card .wx-swiper-dot-active{ /* 选中指示点的样式 */
+  background-color: white;
+}
+
+.items-list .items-card .swiper image{
+  width: 100%;
+  height: 400rpx;
+}
+
+.items-list .items-card .overview{
+  color: dimgray;
+  font-size: 22rpx;
+}
+
+.items-list .items-card .title{
+  font-size: 26rpx;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* 显示两行就隐藏*/
+  display: -webkit-box;
+  -webkit-line-clamp: 2; 
+  -webkit-box-orient: vertical;
+}
+
+.items-list .items-card .price .p0{
+  color: red;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.items-list .items-card .price .p1{
+  color: gray;
+  font-size: 24rpx;
+}
+
+.items-list .items-card .host{
+  position: absolute;
+  top: 360rpx;
+  right: 30rpx;
+  z-index: 10;
+  width: 90rpx;
+  height: 90rpx;
+  overflow: hidden;
+  border: 4rpx solid white;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.items-list .items-card .host image{
+  width: 90rpx;
+  height: 90rpx;
+}
+
+.items-list .items-card .collect{
+  position: absolute;
+  top: 30rpx;
+  right: 30rpx;
+  z-index: 10;
+}
+
+.items-list .items-card .collect image{
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.items-list .items-card .eval{
+  position: absolute;
+  top: 300rpx;
+  left: 30rpx;
+  z-index: 10;
+  padding: 10rpx 17rpx;
+  line-height: 10rpx;
+  white-space: nowrap;
+  background-color: rgba(255, 255, 255, .6);
+  border-radius: 100rpx;
+}
+
+.items-list .items-card .eval image{
+  width: 20rpx;
+  height: 20rpx;
+}

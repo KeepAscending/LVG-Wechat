@@ -1,0 +1,27 @@
+<!--components/modal/modal.wxml-->
+<view
+  class="modal custom-class"
+  style="{{util.wrapperAnimationName(useAnimation, show)}}{{display?'':'display:none;'}}"
+  bind:animationend="onAnimationEnd"
+  catch:touchmove="preventTouchMove">
+
+  <view class="modal__mask mask-class" bind:tap="onClose"></view>
+  <view
+    class="modal__main main-class {{position?'modal--'+position:''}}"
+    style="{{util.mainAnimationName(useAnimation, show, position)}}">
+    <slot />
+  </view>
+
+</view>
+<wxs module="util">
+  module.exports = {
+    mainAnimationName: function(useAnimation, show, position){
+      if(!useAnimation)return ''
+      return 'animation-name:' + (show ? position + '-enter' : position + '-leave') + ';'
+    },
+    wrapperAnimationName: function(useAnimation, show){
+      if(!useAnimation)return ''
+      return 'animation-name:' + (show ? 'fadeIn' : 'fadeOut') + ';'
+    }
+  }
+</wxs>

@@ -1,0 +1,113 @@
+<!--packages/landlordMode/newRes/pages/newRes/newRes.wxml-->
+<view class="container">
+  <!-- 房源地址 -->
+  <view>
+    <view class="h2">房源地址</view>
+    <view>
+      <view class="span">省（直辖市、自治区）</view>
+      <input class="input" value="{{province}}" data-index="1" bindinput="onInputValue" maxlength="10" placeholder="例如：广东省" /> 
+    </view>
+    <view>
+      <view class="span">市（区）</view>
+      <input class="input" value="{{city}}" data-index="2" bindinput="onInputValue" maxlength="10" placeholder="例如：深圳市" /> 
+    </view>
+    <view>
+      <view class="span">详细地址（精确到门牌号）</view>
+      <input class="input" value="{{adress}}" data-index="3" bindinput="onInputValue" maxlength="100" placeholder="例如：南山万花楼第一单元001号" /> 
+    </view>
+  </view>
+  <!-- 房源名称及简介 -->
+  <view>
+    <view class="h2">房源名称及简介</view>
+    <view>
+      <view class="span">名称</view>
+      <input class="input" value="{{title}}" data-index="4" bindinput="onInputValue" maxlength="20" placeholder="请为房源起名，最多20字" /> 
+    </view>
+    <view class="content">
+      <view class="span">简介</view>
+      <textarea class="textarea"
+        value="{{content}}"
+        bindinput="onTextarea"
+        maxlength="500"
+        placeholder="请输入..."
+      />
+      <!-- 字数限制 -->  
+      <view class="words">{{num}} / 500</view>
+    </view>
+  </view>
+  <!-- 房源类型 -->
+  <view>
+    <view class="h2">房源类型</view>
+    <view class="restype">
+      <block wx:for="{{restype}}" wx:key="index">
+        <view bindtap="onRestype" data-name="1" data-index="{{index}}" class="{{item.selected?'active':''}}">{{item.str}}</view>
+      </block>
+    </view>
+  </view>
+  <!-- 配套设施 -->
+  <view>
+    <view class="h2">配套设施</view>
+    <view class="restype">
+      <block wx:for="{{supfaci}}" wx:key="index">
+        <view bindtap="onRestype" data-name="2" data-index="{{index}}" class="{{item.selected?'active':''}}">{{item.str}}</view>
+      </block> 
+    </view>
+  </view>
+  <!-- 房源照片（门面和周边坏境） -->
+  <view>
+    <view class="h2">房源照片（至少上传一张）</view>
+    <view class="uploadWrap">
+      <!-- 预览 -->
+      <block wx:for="{{images}}" wx:key="index">
+        <view class="preview">
+          <image src="{{item}}" mode="aspectFill"></image>
+          <view bindtap="onShutPic" data-index="{{index}}" class="iconfont icon-guanbi1"></view>
+        </view>
+      </block>
+      <!-- 添加图片或视频 -->
+      <view bindtap="addImage" class="upload">
+        <image src="/images/uploadPic.png" mode="aspectFill"></image>
+        <view class="span">上传图片</view>
+      </view>
+    </view>
+  </view>
+  <!-- 预订设置 -->
+  <view>
+    <view class="h2">预订设置</view>
+    <view>
+      <view class="span">当天预订截止时间</view>
+      <view class="input" bindtap="openModal" data-index="1">{{deline!=''?deline:'未选择'}}</view>
+    </view>
+    <view>
+      <view class="span">最早入住时间</view>
+      <view class="input" bindtap="openModal" data-index="2">{{earliest!=''?earliest:'未选择'}}</view>
+    </view>
+    <view>
+      <view class="span">最晚入住时间</view>
+      <view class="input" bindtap="openModal" data-index="3">{{latest!=''?latest:'未选择'}}</view>
+    </view>
+    <view>
+      <view class="span">最晚退房时间</view>
+      <view class="input" bindtap="openModal" data-index="4">{{checkout!=''?checkout:'未选择'}}</view>
+    </view>
+  </view>
+</view>
+<!-- 页脚 -->
+<view class="footer">
+  <view bindtap="onSubmit" class="footer-btn">{{updFlag?'修改':'提交'}}</view>
+</view>
+<!-- modal -->
+<modal
+  position="bottom"
+  useAnimation="{{flase}}"
+  main-class="modal-main"
+  show="{{modalShow}}"
+  bindclose="closeModal">
+  <view class="modal-content">
+    <scroll-view class="scroll" scroll-y="true">
+      <block wx:for="{{24}}" wx:key="index">
+        <view bindtap="onSelectTime" class="scroll-text" data-index="{{index}}"> {{(index>=10?index:'0'+index)}}:00:00</view>
+      </block>
+    </scroll-view>
+  </view>
+</modal>

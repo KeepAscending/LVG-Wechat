@@ -1,0 +1,23 @@
+<!--components/landlordTab/landlordTab.wxml-->
+<view class="landlordTab">
+  <view class="flex1 {{curNum==0?'active':''}}">
+    <navigator open-type="reLaunch" hover-class="none" url="{{curNum==0?'##':'/packages/landlordMode/main/pages/inbox/inbox'}}">
+      <view class="iconfont icon-xiaoxi1"></view>
+      <text>收件箱</text>
+    </navigator>
+  </view>
+  <view class="flex1 {{curNum==1?'active':''}}">
+    <navigator open-type="reLaunch" hover-class="none" url="{{curNum==1?'##':'/packages/landlordMode/main/pages/housing/housing'}}">
+      <view class="iconfont icon-fangyuan"></view>
+      <text>房源</text>
+    </navigator>
+  </view>
+  <view class="flex1 {{curNum==2?'active':''}}">
+    <navigator open-type="reLaunch" hover-class="none" url="{{curNum==2?'##':'/packages/landlordMode/main/pages/landlord/landlord'}}">
+      <view class="iconfont icon-geren"></view>
+      <text>我的</text>
+    </navigator>
+  </view>
+</view>
+
+

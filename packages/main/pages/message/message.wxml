@@ -1,0 +1,10 @@
+<!--packages/main/pages/message/message.wxml-->
+<view class="container">
+  <view class="title">
+    <view>收件箱</view>
+    <view>和房东联系的消息会显示在这里</view>
+    <image src="/images/xiaoxi.jpg" mode="aspectFill"></image>
+    <navigator hover-class="more-active" url="/packages/items/pages/items-list/items-list" class="more">开始探索</navigator>
+  </view>
+</view>
+<mainTab curNum="2"></mainTab>

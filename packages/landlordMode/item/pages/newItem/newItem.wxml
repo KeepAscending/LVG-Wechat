@@ -1,0 +1,138 @@
+<!--packages/landlordMode/item/pages/newItem/newItem.wxml-->
+<view class="container">
+  <!-- 房型标题及价格 -->
+  <view>
+    <view class="h2">房型标题及价格</view>
+    <view>
+      <view class="span">标题</view>
+      <input class="input" value="{{title}}" data-index="1" bindinput="onInputValue" maxlength="100" placeholder="请为房型起一个有吸引力的标题" /> 
+    </view>
+    <view>
+      <view class="span">每晚价格（单位为 元）</view>
+      <view class="flex">
+        <view class="symbol">¥</view>
+        <input class="input" value="{{price}}" data-index="2" bindinput="onInputValue" maxlength="8" placeholder="建议价格：¥ 177" type="number"/> 
+      </view>
+    </view>
+    <view>
+      <view class="span">长期折扣（租用30天以上即为长期，单位为 %）</view>
+      <view class="flex">
+        <view class="symbol">%</view>
+        <input class="input" value="{{discount}}" data-index="3" bindinput="onInputValue" maxlength="3" placeholder="无折扣输入 100" type="number"/>
+      </view>
+    </view>
+  </view>
+  <!-- 房型类别 -->
+  <view>
+    <view class="h2">房型类别</view>
+    <view class="flex">
+      <view bindtap="onType" data-index="1" class="type {{typeIndex==1?'active':''}}">
+        <view class="iconfont icon-fangzi"></view>
+        <view class="h3">整个房源</view>
+        <view>出租整套房源，房客无需与他人合住</view>
+      </view>
+      <view bindtap="onType" data-index="2" class="type {{typeIndex==2?'active':''}}">
+        <view class="iconfont icon-fangjian"></view>
+        <view class="h3">独立房间</view>
+        <view>房源中的一间，房客有自己的单独卧室</view>
+      </view>
+    </view>
+  </view>
+  <!-- 基础设施 -->
+  <view>
+    <view class="h2">基础设施</view>
+    <view class="restype">
+      <block wx:for="{{infrast}}" wx:key="index">
+        <view bindtap="onFaci" data-name="1" data-index="{{index}}" class="{{item.selected?'active':''}}">{{item.str}}</view>
+      </block> 
+    </view>
+  </view>
+  <!-- 安全设施 -->
+  <view>
+    <view class="h2">安全设施</view>
+    <view class="restype">
+      <block wx:for="{{safefaci}}" wx:key="index">
+        <view bindtap="onFaci" data-name="2" data-index="{{index}}" class="{{item.selected?'active':''}}">{{item.str}}</view>
+      </block> 
+    </view>
+  </view>
+  <!-- 房型照片（至少上传一张） -->
+  <view>
+    <view class="h2">房型照片（至少上传一张）</view>
+    <view class="uploadWrap">
+      <!-- 预览 -->
+      <block wx:for="{{images}}" wx:key="index">
+        <view class="preview">
+          <image src="{{item}}" mode="aspectFill"></image>
+          <view bindtap="onShutPic" data-index="{{index}}" class="iconfont icon-guanbi1"></view>
+        </view>
+      </block>
+      <!-- 添加图片 -->
+      <view bindtap="addImage" class="upload">
+        <image src="/images/uploadPic.png" mode="aspectFill"></image>
+        <view class="span">上传图片</view>
+      </view>
+    </view>
+  </view>
+  <!-- 户型及床铺 -->
+  <view>
+    <view class="h2">户型及床铺</view>
+    <view class="parameter">
+      <view>宜住人数</view>
+      <view class="flex">
+        <view bindtap="onChangeNum" data-index="1" data-flag="{{true}}" class="iconfont icon-normal"></view>
+        <view class="num">{{people}}</view>
+        <view bindtap="onChangeNum" data-index="1" data-flag="{{false}}" class="iconfont icon-you-"></view>
+      </view>
+    </view>
+    <view class="parameter">
+      <view bindtap="onChangeNum">房间个数</view>
+      <view class="flex">
+        <view bindtap="onChangeNum" data-index="2" data-flag="{{true}}" class="iconfont icon-normal"></view>
+        <view class="num">{{room}}</view>
+        <view bindtap="onChangeNum" data-index="2" data-flag="{{false}}" class="iconfont icon-you-"></view>
+      </view>
+    </view>
+    <view class="parameter">
+      <view>卫生间个数</view>
+      <view class="flex">
+        <view bindtap="onChangeNum" data-index="3" data-flag="{{true}}" class="iconfont icon-normal"></view>
+        <view class="num">{{toilet}}</view>
+        <view bindtap="onChangeNum" data-index="3" data-flag="{{false}}" class="iconfont icon-you-"></view>
+      </view>
+    </view>
+    <view class="parameter">
+      <view>床铺数量</view>
+      <view class="flex">
+        <view bindtap="onChangeNum" data-index="4" data-flag="{{true}}" class="iconfont icon-normal"></view>
+        <view class="num">{{bedNum}}</view>
+        <view bindtap="onChangeNum" data-index="4" data-flag="{{false}}" class="iconfont icon-you-"></view>
+      </view>
+    </view>
+    <block wx:for="{{bedNum}}" wx:key="index">
+      <view class="parameter">
+        <view>床铺{{index+1}}</view>
+        <view class="bedsParam" bindtap="openModal" data-index="{{index}}">{{bedStr[index]?bedStr[index]:'未选择'}}</view>
+      </view>
+    </block>
+  </view>
+</view>
+<!-- 页脚 -->
+<view class="footer">
+  <view bindtap="onSubmit" class="footer-btn">{{updFlag?'修改':'发布'}}</view>
+</view>
+<!-- modal -->
+<modal
+  position="bottom"
+  useAnimation="{{flase}}"
+  main-class="modal-main"
+  show="{{modalShow}}"
+  bindclose="closeModal">
+  <view class="modal-content">
+    <scroll-view class="scroll" scroll-y="true">
+      <block wx:for="{{bedsParam}}" wx:key="index">
+        <view bindtap="onSelectBed" class="scroll-text" data-index="{{index}}">{{item}}</view>
+      </block>
+    </scroll-view>
+  </view>
+</modal>

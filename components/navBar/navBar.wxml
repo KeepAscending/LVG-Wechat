@@ -1,0 +1,10 @@
+<!--components/navBar/navBar.wxml-->
+<view class="navbar" style="height:{{tatalHeight-1}}">
+  <view wx:if="{{showNav}}" class="navbar-wrap" 
+    style="top:{{navTop-1}}px;left:{{navLeft-1}}px;height:{{navHeight-2}}px;width:{{navWidth-2}}px;border-radius:{{navHeight-1}}px">
+    <view class="iconfont icon-left"  bindtap="navBack"></view>
+    <view class="iconfont icon-shuxian"></view>
+    <view class="iconfont icon-Homehomepagemenu" bindtap="toIndex"></view>
+  </view>
+</view>
+
